@@ -1,9 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {ReactRouter} from 'react-router-dom'
+import './index.css'
+import App from './App'
 
 ReactDOM.render(
-  <App />,
+  <ReactRouter>
+    <App />
+  </ReactRouter>,
   document.getElementById('root')
-);
+)
