@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {ReactRouter} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 import './index.css'
-import App from './App'
+import App from './app/App'
 
 ReactDOM.render(
-  <ReactRouter>
+  <BrowserRouter>
     <App />
-  </ReactRouter>,
+  </BrowserRouter>,
   document.getElementById('root')
 )
