@@ -1,0 +1,19 @@
+#registration-container {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+}
+
+#registration-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-self: center;
+  margin: 5px;
+}
