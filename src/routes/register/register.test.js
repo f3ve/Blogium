@@ -12,5 +12,6 @@ describe('Registeration Route', () => {
       </BrowserRouter>,
       div
     )
+    ReactDOM.unmountComponentAtNode(div)
   })
 })
