@@ -4,6 +4,7 @@ import Nav from '../components/nav/nav'
 import Register from '../routes/register/register'
 import Login from '../routes/login/login'
 import Main from '../routes/main/main'
+import PostPage from '../routes/postPage/postPage'
 import dummyStore from '../dummy-store'
 import Context from '../context'
 import './App.css'
@@ -75,6 +76,7 @@ class App extends React.Component{
                 />
                 <Route
                   path={'/post/:id'}
+                  component={PostPage}
                 />
               </Switch>
             </main>
