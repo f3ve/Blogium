@@ -72,7 +72,10 @@ class App extends React.Component{
                 <Route
                   path={'/login'}
                   component={Login}
-                  />
+                />
+                <Route
+                  path={'/post/:id'}
+                />
               </Switch>
             </main>
           </Context.Provider>

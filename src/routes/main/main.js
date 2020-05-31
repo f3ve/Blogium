@@ -1,11 +1,24 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import Context from '../../context'
+import PostListItem from '../../components/postListItem/postListItem'
 import './main.css'
 
-function Main(props) {
-  return (
-    <h1>hello main page</h1>
-  )
+class Main extends React.Component {
+  static contextType = Context
+
+  render() {
+    return (
+      <ul>
+        {
+          this.context.posts.map(p => {
+            return (
+              <PostListItem post={p} key={p.id}/>
+            )
+          })
+        }
+      </ul>
+    )
+  }
 }
 
 export default Main

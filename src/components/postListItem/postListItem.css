@@ -1,0 +1,22 @@
+.post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black;
+  margin: 5px;
+  padding: 5px;
+}
+
+.postImg {
+  border-radius: 8px;
+  max-width: 90%;
+  height: auto;
+}
+
+.author {
+  margin-top: 0;
+}
+
+.postTitle {
+  margin-bottom: 5px;
+}
