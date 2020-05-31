@@ -1,0 +1,19 @@
+.comment {
+  border-top: 1px solid black;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-img {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 25px;
+  margin-right: 5px;
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+}
