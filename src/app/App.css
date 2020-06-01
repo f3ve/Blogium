@@ -2,14 +2,14 @@
   box-sizing: border-box;
 }
 
-ul {
+/* ul {
   padding: 0;
   margin: 0;
-}
+} */
 
-li {
+/* li {
   list-style: none;
-}
+} */
 
 main {
   margin-top: 95px;

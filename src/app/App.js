@@ -7,6 +7,7 @@ import Main from '../routes/main/main'
 import PostPage from '../routes/postPage/postPage'
 import dummyStore from '../dummy-store'
 import Context from '../context'
+import Editor from '../routes/editor/editor'
 import './App.css'
 
 
@@ -77,6 +78,10 @@ class App extends React.Component{
                 <Route
                   path={'/post/:id'}
                   component={PostPage}
+                />
+                <Route
+                  path={'/editor'}
+                  component={Editor}
                 />
               </Switch>
             </main>

@@ -1,0 +1,13 @@
+.editor {
+  /* border: 1px solid gray; */
+  /* border-radius: 10px; */
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  /* height: 300px; */
+}
+
+.editor > li {
+  list-style: square;
+  margin: initial
+}

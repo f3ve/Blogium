@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom'
 import {BrowserRouter} from 'react-router-dom'
 import './index.css'
 import App from './app/App'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faBold, faItalic, faList, faLink, faPlus} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faBold,
+  faList,
+  faItalic,
+  faLink,
+  faPlus
+)
 
 ReactDOM.render(
   <BrowserRouter>

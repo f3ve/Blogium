@@ -17,7 +17,7 @@ export default {
       username: 'Jamo',
       email: 'jamie@email.com',
       password: 'password',
-      bio: 'Hi my name is Jamie and I wished I looked as good as the dude form Outlander',
+      bio: 'Hi my name is Jamie and I wished I looked as good as the dude from Outlander',
       date_created: new Date(),
       date_modified: new Date(),
       img: 'https://picsum.photos/200'
