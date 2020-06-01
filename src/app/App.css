@@ -2,20 +2,20 @@
   box-sizing: border-box;
 }
 
-/* ul {
+.comments-list, .post-list {
   padding: 0;
   margin: 0;
-} */
+}
 
-/* li {
+.post-container, .comment {
   list-style: none;
-} */
+}
 
 main {
   margin-top: 95px;
 }
 
-.button-container {
+.button-container ul {
   display: flex;
   flex-direction: row-reverse;
   align-self: center;

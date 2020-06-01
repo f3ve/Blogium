@@ -8,7 +8,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <ul>
+      <ul className='post-list'>
         {
           this.context.posts.map(p => {
             return (
