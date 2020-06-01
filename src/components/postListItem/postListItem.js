@@ -25,7 +25,10 @@ PostListItem.defaultProps = {
     date_created: new Date(),
     title: '',
     author: '',
-    img: '' 
+    img: '' ,
+    user: {
+      username: ''
+    }
   }
 }
 

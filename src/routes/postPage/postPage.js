@@ -1,12 +1,16 @@
 import React from 'react'
 import Context from '../../context'
 import {Link} from 'react-router-dom'
-import dummyStore from '../../dummy-store'
 import Comments from '../../components/comments/comments'
 import CommentForm from '../../components/commentForm/commentForm'
 import './postPage.css'
 
 class PostPage extends React.Component {
+  static defaultProps = {
+    match:{
+      params: 3
+    }
+  }
   static contextType = Context
 
   state = {
@@ -17,9 +21,9 @@ class PostPage extends React.Component {
 
   componentDidMount() {
     const { id } = this.props.match.params
-    const post = dummyStore.posts.filter(p => p.id === parseInt(id))[0]
-    const user = post.user
-    const comments = dummyStore.comments.filter(c => c.post_id === parseInt(id))
+    const post = this.context.posts.filter(p => p.id === parseInt(id))[0]
+    const user = this.context.users.filter(u => u.id === post.user.id)[0]
+    const comments = this.context.comments.filter(c => c.post_id === parseInt(id))
     this.setState({
       post,
       comments,
@@ -27,7 +31,7 @@ class PostPage extends React.Component {
     })
   }
 
-  render() {
+  renderPost() {
     const {post, comments, user} = this.state
     return (
       <React.Fragment>
@@ -50,6 +54,19 @@ class PostPage extends React.Component {
           <CommentForm />
           <Comments comments={comments} />
         </section>
+      </React.Fragment>
+    )
+  }
+  
+  render() {
+    // const {post, comments, user} = this.state
+    return (
+      <React.Fragment>
+        {
+          !this.state.post
+            ? <h2>Loading</h2>
+            : this.renderPost()
+        }
       </React.Fragment>
     )
   }

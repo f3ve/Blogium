@@ -1,10 +1,15 @@
 import React from 'react'
-import postListItem from '../../components/postListItem/postListItem'
 import Context from '../../context'
 import './userPage.css'
 import PostListItem from '../../components/postListItem/postListItem'
 
 export default class UserPage extends React.Component {
+  static defaultProps = {
+    match: {
+      params: ''
+    }
+  }
+
   static contextType = Context
 
   state = {
@@ -22,7 +27,7 @@ export default class UserPage extends React.Component {
     })
   }
 
-  render() {
+  renderPage() {
     const {user, posts} = this.state
     return (
       <React.Fragment >
@@ -38,6 +43,18 @@ export default class UserPage extends React.Component {
               )}
           </ul>
         </section>
+      </React.Fragment>
+    )
+  }
+
+  render() {
+    return (
+      <React.Fragment >
+        {
+          !this.state.user
+            ?<h2>Loading</h2>
+            : this.renderPage()
+        }
       </React.Fragment>
     )
   }

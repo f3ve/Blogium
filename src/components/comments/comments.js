@@ -27,4 +27,8 @@ function Comments(props) {
   )
 }
 
+Comments.defaultProps = {
+  comments: []
+}
+
 export default Comments
