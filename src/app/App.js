@@ -8,27 +8,16 @@ import PostPage from '../routes/postPage/postPage'
 import dummyStore from '../dummy-store'
 import Context from '../context'
 import Editor from '../routes/editor/editor'
+import UserPage from '../routes/userPage/userPage'
 import './App.css'
 
 
 class App extends React.Component{
   state = {
-    posts: [],
-    users: [],
-    comments: [],
+    posts: dummyStore.posts,
+    users: dummyStore.users,
+    comments: dummyStore.comments,
     error: null
-  }
-
-  componentDidMount() {
-    //to simulate api call
-    setTimeout(
-      this.setState({
-        posts: dummyStore.posts,
-        users: dummyStore.users,
-        comments: dummyStore.comments,
-      }),
-      3000
-    )
   }
 
   setPosts = (posts) => {
@@ -82,6 +71,10 @@ class App extends React.Component{
                 <Route
                   path={'/editor'}
                   component={Editor}
+                />
+                <Route
+                  path={'/user/:id'}
+                  component={UserPage}
                 />
               </Switch>
             </main>

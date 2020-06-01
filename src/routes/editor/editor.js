@@ -45,7 +45,7 @@ export default class Editor extends React.Component {
       <React.Fragment>
         <EditorToolbar setUrl={this.setUrl} format={this.format} handleSubmit={this.handleSubmit} />
         <div className='editor' id='sampleeditor' contentEditable='true'>
-          <h2 id='title'>Title</h2>
+          <h2 id='title'>Enter Your Title...</h2>
         </div>
       </React.Fragment>
     )

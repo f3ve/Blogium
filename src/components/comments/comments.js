@@ -1,5 +1,6 @@
 import React from 'react'
 import {translateDate} from '../utils/utils'
+import {Link} from 'react-router-dom'
 import './comments.css'
 
 function Comments(props) {
@@ -11,7 +12,9 @@ function Comments(props) {
           return (
             <li key={c.id} className='comment'>
               <div className='user-container'>
-                <img src={c.user.img} alt={`${c.user.username}'s profile icon`} className='user-img'/>
+                <Link to={`/user/${c.user.id}`}>
+                  <img src={c.user.img} alt={`${c.user.username}'s profile icon`} className='user-img'/>
+                </Link>
                 <p>{c.user.username}</p>
               </div>
               <p>{c.content}</p>

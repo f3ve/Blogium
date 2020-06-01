@@ -1,5 +1,6 @@
 import React from 'react'
 import Context from '../../context'
+import {Link} from 'react-router-dom'
 import dummyStore from '../../dummy-store'
 import Comments from '../../components/comments/comments'
 import CommentForm from '../../components/commentForm/commentForm'
@@ -36,7 +37,9 @@ class PostPage extends React.Component {
           <section className='author-container'>
             <h3>Written by</h3>
             <div className='author-info'>
-              <img src={user.img} alt={`${user.username}'s profile icon`} className='author-img'></img>
+              <Link to={`/user/${user.id}`}>
+                <img src={user.img} alt={`${user.username}'s profile icon`} className='author-img'></img>
+              </Link>
               <p className='author-username'>{user.username}</p>
             </div>
             <p>{user.bio}</p>

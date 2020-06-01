@@ -10,7 +10,7 @@ export default class Nav extends React.Component {
           <h1>Blogium</h1>
         </Link>
         <nav>
-          <Link to='/user/page'>Sample user page!</Link>
+          <Link to='/user/3'>Sample user page!</Link>
           <span> / </span>
           <Link to='/editor'>New Post!</Link>
           <span> / </span>
