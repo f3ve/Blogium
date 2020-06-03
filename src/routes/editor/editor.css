@@ -35,11 +35,12 @@
   background-color:rgb(21, 34, 75);
   margin-left: auto;
   margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
   height: auto;
   min-height: 39px;
   font-family: 'Courier New', Courier, monospace;
   overflow: auto;
   color: white;
   padding: 8px;
-  border-radius: 8px;
 }

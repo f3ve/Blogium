@@ -12,6 +12,7 @@ export default class Editor extends React.Component {
     const url = document.getElementById('txtFormatUrl').value;
     const show = document.getElementById('url-input')
     const sText = document.getSelection();
+    // create an even called insert HTML 
     document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank">' + sText + '</a>');
     document.getElementById('txtFormatUrl').value = ''
     show.classList.add('hidden')
@@ -34,18 +35,26 @@ export default class Editor extends React.Component {
   addCodeBlock = () => {
     const codeBlock = document.createElement('pre')
     const target = document.getSelection()
-    if (target.focusNode.nodeName.includes('#text') || target.focusNode.classList.contains('title') || target.focusNode.className.includes('codeBlock')) {
+    console.log(target)
+    if (target.focusNode.nodeName.includes('#text') || 
+        target.focusNode.classList.contains('title') || 
+        target.focusNode.className.includes('codeBlock') ||
+        target.focusNode.className.includes('editor')) {
       return
     }
     const id = `codeBlock-${document.getElementsByClassName('codeBlock').length + 1}`
 
+
     codeBlock.classList.add('codeBlock')
     codeBlock.addEventListener('paste', this.paste)
-    document.execCommand('insertHTML', false, `<pre class='codeBlock' id='${id}'>${target}</pre>`)
+    // co
+    codeBlock.setAttribute('id', `${id}`)
+    target.focusNode.replaceWith(codeBlock)
     
     this.addLineAfterBlock(id)
   }
 
+  
   addLineAfterBlock(id) {
     const block = document.getElementById(`${id}`)
     const div = document.createElement('div')
@@ -58,14 +67,14 @@ export default class Editor extends React.Component {
       block.after(div)
     }
   }
-
+  
   paste = (e) => {
     e.preventDefault()
-
+    
     const open = new RegExp('<', 'gi')
     const close = new RegExp('>', 'gi')
     const text = (e.originalEvent || e).clipboardData.getData('text/plain').replace(open, '&lt').replace(close, '&gt')
-
+    
     document.execCommand('insertHTML', false, text)
   }
   
@@ -73,7 +82,7 @@ export default class Editor extends React.Component {
     const content = document.getElementById('sampleeditor').innerHTML
     const title = document.getElementById('title').textContent
     const id = Math.random() * Math.floor(100000)
-
+    
     const post = {
       id,
       title,
@@ -87,11 +96,14 @@ export default class Editor extends React.Component {
         bio: 'Hi my name is Jimmy and this is my bio'
       }
     } 
-
+    
     console.log(post)
+    test = document.getElementById('test')
+    test.innerHTML = content
   }
-
+  
   render() {
+    window.addEventListener('keyup', this.press)
     return (
       <React.Fragment>
         <EditorToolbar 
@@ -104,8 +116,9 @@ export default class Editor extends React.Component {
         />
         <div id='title' contentEditable='true' spellCheck='true' data-placeholder='Title...' className='title'>
         </div>
-        <div className='editor' id='sampleeditor' contentEditable='true' spellCheck='true' data-placeholder='Body...' onPaste={this.paste}>
+        <div className='editor' id='sampleeditor' contentEditable='true' spellCheck='true' data-placeholder='Body...'>
         </div>
+        <div id='test'></div> 
       </React.Fragment>
     )
   }
