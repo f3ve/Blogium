@@ -114,6 +114,8 @@ export default class Editor extends React.Component {
           setTitle={this.setTitle}
           addCodeBlock={this.addCodeBlock}
         />
+
+        {/*use textarea or article instead of div*/}
         <div id='title' contentEditable='true' spellCheck='true' data-placeholder='Title...' className='title'>
         </div>
         <div className='editor' id='sampleeditor' contentEditable='true' spellCheck='true' data-placeholder='Body...'>

@@ -9,15 +9,43 @@ import dummyStore from '../dummy-store'
 import Context from '../context'
 import Editor from '../routes/editor/editor'
 import UserPage from '../routes/userPage/userPage'
+import PrivateRoute from '../components/utils/PrivateRoute'
+import PublicOnlyRoute from '../components/utils/PublicOnlyRoute'
 import './App.css'
+import IdleService from '../services/idle-services'
+import TokenService from '../services/token-service'
+import AuthApiService from '../services/auth-api-service'
 
 
 class App extends React.Component{
   state = {
-    posts: dummyStore.posts,
-    users: dummyStore.users,
-    comments: dummyStore.comments,
+    posts: [],
+    users: [],
+    comments: [],
     error: null
+  }
+  
+  componentDidMount() {
+    IdleService.setIdleCallback(this.logOutFromIdle)
+
+    if(TokenService.hasAuthToken()){
+      IdleService.registerIdleTimeResets()
+      TokenService.queCallbackBeforeExpirey(() => {
+        AuthApiService.postRefreshToken()
+      })
+    }
+  }
+
+  componentWillUnmount() {
+    IdleService.unRegisterIdleResets()
+    TokenService.clearCallbackBeforeExpirey()
+  }
+
+  logOutFromIdle = () => {
+    TokenService.clearAuthToken()
+    TokenService.clearCallbackBeforeExpirey()
+    IdleService.unRegisterIdleResets()
+    this.forceUpdate()
   }
 
   setPosts = (posts) => {
@@ -56,11 +84,11 @@ class App extends React.Component{
                   exact path = {'/'}
                   component = {Main}
                   />
-                <Route 
+                <PublicOnlyRoute 
                   path={'/register'}
                   component={Register}
                   />
-                <Route
+                <PublicOnlyRoute
                   path={'/login'}
                   component={Login}
                 />
@@ -68,7 +96,7 @@ class App extends React.Component{
                   path={'/post/:id'}
                   component={PostPage}
                 />
-                <Route
+                <PrivateRoute
                   path={'/editor'}
                   component={Editor}
                 />
