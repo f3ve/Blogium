@@ -20,8 +20,7 @@ static contextType = Context
 
     PostsApiService.getUser(token.id)
       .then(u => {
-        this.context.setActiveUser(u)
-        this.props.history.push(destination)
+        this.context.setActiveUser(u, () => this.props.history.push(destination))
       })
       .catch(err => console.log(err))
   }

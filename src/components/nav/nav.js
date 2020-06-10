@@ -44,12 +44,19 @@ export default class Nav extends React.Component {
   }
 
   render() {
-    const user = this.context.activeUser
+    const user = this.props.user
     return (
-      <header>
-        <Link to='/'>
-          <h1>Blogium</h1>
-        </Link>
+      <React.Fragment>
+        <header>
+          <Link to='/'>
+            <h1>Blogium</h1>
+          </Link>
+          {
+            TokenService.hasAuthToken()
+            ? this.renderUserIcon(user)
+            : this.renderLoginLink()
+          }
+        </header>
         <nav className='hiddenMenu'>
           <ul>
             <li><Link to={'/editor'}>Create a new post</Link></li>
@@ -59,16 +66,11 @@ export default class Nav extends React.Component {
             <li><Link onClick={e => {
               this.handleLogoutClick() 
               this.toggleMenu(e)
-              }
-            }>Logout</Link></li>
+            }
+          }>Logout</Link></li>
           </ul>
         </nav>
-        {
-          TokenService.hasAuthToken()
-            ? this.renderUserIcon(user)
-            : this.renderLoginLink()
-        }
-      </header>
+      </React.Fragment>
     )
   }
 }

@@ -4,6 +4,7 @@ header {
   display: flex;
   position: fixed;
   top: 0;
+  z-index: 1;
   align-items: center;
   justify-content: space-between;
   padding: 5px;
@@ -13,7 +14,6 @@ header {
 
 .hiddenMenu {
   position: fixed;
-  z-index: 2;
   top: -150px;
   transition: top 0.5s;
   display: flex;

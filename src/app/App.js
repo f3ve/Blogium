@@ -70,10 +70,10 @@ class App extends React.Component{
     })
   }
 
-  setActiveUser = (user) => {
+  setActiveUser = (user, callBack) => {
     this.setState({
       activeUser: user
-    })
+    }, callBack())
   }
 
   clearActiveUser = () => {
@@ -101,7 +101,7 @@ class App extends React.Component{
     }
       return (
         <div className="App">
-          <Nav />
+          <Nav user={this.state.activeUser}/>
           <Context.Provider value={contextValue}>
             <main>
               <Switch>
