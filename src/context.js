@@ -7,6 +7,7 @@ const Context = React.createContext({
   activeUser: {},
   error: null,
   setActiveUser: () => {},
+  clearActiveUser: () => {},
   setError: () => {},
   clearError: () => {},
   setPosts: () => {}

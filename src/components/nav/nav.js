@@ -1,9 +1,20 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import TokenService from '../../services/token-service'
+import IdleService from '../../services/idle-services'
+import Context from '../../context'
 import './nav.css'
 
 export default class Nav extends React.Component {
+  static contextType = Context
+
+  handleLogoutClick = () => {
+    TokenService.clearAuthToken()
+    TokenService.clearCallbackBeforeExpirey()
+    IdleService.unRegisterIdleResets()
+    this.context.clearActiveUser()
+    this.forceUpdate()
+  }
 
   renderLoginLink() {
     return (
@@ -33,7 +44,7 @@ export default class Nav extends React.Component {
   }
 
   render() {
-    const user = this.props.activeUser
+    const user = this.context.activeUser
     return (
       <header>
         <Link to='/'>
@@ -43,14 +54,18 @@ export default class Nav extends React.Component {
           <ul>
             <li><Link to={'/editor'}>Create a new post</Link></li>
             <li><Link to={'/drafts'}>View your drafts</Link></li>
-            <li><Link to={`/users/${user.id}`}>View your page</Link></li>
+            <li><Link to={`/user/${user.id}`}>View your page</Link></li>
             <li><Link to={`/account`}>Edit your Account</Link></li>
-            <li><Link>Logout</Link></li>
+            <li><Link onClick={e => {
+              this.handleLogoutClick() 
+              this.toggleMenu(e)
+              }
+            }>Logout</Link></li>
           </ul>
         </nav>
         {
           TokenService.hasAuthToken()
-            ? this.renderUserIcon(this.props.activeUser)
+            ? this.renderUserIcon(user)
             : this.renderLoginLink()
         }
       </header>
