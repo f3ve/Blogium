@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import Context from '../../context'
 import TokenService from '../../services/token-service'
 import IdleService from '../../services/idle-services'
-import Context from '../../context'
 import './nav.css'
 
 export default class Nav extends React.Component {

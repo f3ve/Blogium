@@ -15,6 +15,8 @@ import IdleService from '../services/idle-services'
 import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
 import PostsApiService from '../services/posts-api-services'
+import Account from '../routes/account/account'
+import Drafts from '../routes/drafts/drafts'
 
 
 class App extends React.Component{
@@ -128,6 +130,15 @@ class App extends React.Component{
                 <Route
                   path={'/user/:id'}
                   component={UserPage}
+                />
+                <PrivateRoute 
+                  path={'/drafts'}
+                  component={Drafts}
+                />
+                <PrivateRoute 
+                  path={'/account'}
+                  component={Account}
+                  // user={this.state.user}
                 />
               </Switch>
             </main>
