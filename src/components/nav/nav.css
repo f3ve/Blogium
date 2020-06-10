@@ -10,3 +10,17 @@ header {
   border-bottom: 2px solid black;
   background-color: lightgray;
 }
+
+.hiddenMenu {
+  position: fixed;
+  z-index: 2;
+  top: -150px;
+  transition: top 0.5s;
+  display: flex;
+  flex-direction: column;
+  background-color:gray;
+}
+
+.hiddenMenu.show {
+  top: 50px
+}

@@ -1,10 +1,13 @@
 import React from 'react'
 import AuthApiService from '../../services/auth-api-service'
+import Context from '../../context'
+import TokenService from '../../services/token-service'
+import PostsApiService from '../../services/posts-api-services'
 import {withRouter} from 'react-router-dom'
 import './login.css'
 
 class Login extends React.Component {
-
+static contextType = Context
   
   clickCancel(e) {
     e.preventDefault()
@@ -13,7 +16,14 @@ class Login extends React.Component {
 
   handleSuccess() {
     const destination = (this.props.location.state || {}).from || '/'
-    this.props.history.push(destination)
+    const token = TokenService.readJwToken()
+
+    PostsApiService.getUser(token.id)
+      .then(u => {
+        this.Context.setActiveUser(u)
+        this.props.history.push(destination)
+      })
+      .catch(err => console.log(err))
   }
 
   handleSubmit(e) {

@@ -5,7 +5,6 @@ import Register from '../routes/register/register'
 import Login from '../routes/login/login'
 import Main from '../routes/main/main'
 import PostPage from '../routes/postPage/postPage'
-import dummyStore from '../dummy-store'
 import Context from '../context'
 import Editor from '../routes/editor/editor'
 import UserPage from '../routes/userPage/userPage'
@@ -15,6 +14,7 @@ import './App.css'
 import IdleService from '../services/idle-services'
 import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
+import PostsApiService from '../services/posts-api-services'
 
 
 class App extends React.Component{
@@ -22,8 +22,11 @@ class App extends React.Component{
     posts: [],
     users: [],
     comments: [],
+    activeUser: {},
     error: null
   }
+
+
   
   componentDidMount() {
     IdleService.setIdleCallback(this.logOutFromIdle)
@@ -33,6 +36,13 @@ class App extends React.Component{
       TokenService.queCallbackBeforeExpirey(() => {
         AuthApiService.postRefreshToken()
       })
+      const token = TokenService.readJwToken()
+      PostsApiService.getUser(token.id)
+        .then(u => 
+          this.setState({
+            activeUser: u
+          })
+        )
     }
   }
 
@@ -60,6 +70,18 @@ class App extends React.Component{
     })
   }
 
+  setActiveUser = (user) => {
+    this.setState({
+      activeUser: user
+    })
+  }
+
+  clearActiveUser = (user) => {
+    this.setState({
+      activeUser: {}
+    })
+  }
+
   clearError = () => {
     this.setState({error: null})
   }
@@ -69,14 +91,16 @@ class App extends React.Component{
       posts: this.state.posts,
       users: this.state.users,
       comments: this.state.comments,
+      activeUser: this.state.activeUser,
       error: this.state.error,
+      setActiveUser: this.setActiveUser,
       setError: this.setError,
       clearError: this.clearError,
       setPosts: this.setPosts
     }
       return (
         <div className="App">
-          <Nav />
+          <Nav activeUser={this.state.activeUser}/>
           <Context.Provider value={contextValue}>
             <main>
               <Switch>
