@@ -1,10 +1,18 @@
 import React from 'react'
+import PostsApiService from '../../services/posts-api-services'
 import Context from '../../context'
 import PostListItem from '../../components/postListItem/postListItem'
 import './main.css'
 
 class Main extends React.Component {
   static contextType = Context
+
+  componentDidMount() {
+    this.context.clearError()
+    PostsApiService.getPosts()
+      .then(this.context.setPosts)
+      .catch(err => console.log(err))
+  }
 
   render() {
     return (

@@ -1,23 +1,48 @@
 import React from 'react'
+import AuthApiService from '../../services/auth-api-service'
 import {withRouter} from 'react-router-dom'
 import './login.css'
 
 class Login extends React.Component {
 
+  
   clickCancel(e) {
     e.preventDefault()
     this.props.history.push('/')
+  }
+
+  handleSuccess() {
+    const destination = (this.props.location.state || {}).from || '/'
+    this.props.history.push(destination)
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+
+    const {username, password} = e.target
+
+    AuthApiService.postLogin({
+      username: username.value,
+      password: password.value
+    })
+      .then(() => {
+        username.value = ''
+        password.value = ''
+        this.handleSuccess()
+      })
+      .catch(res => alert(res.error))
   }
 
   render() {
     return(
       <section id='login-container'>
         <h2>Login</h2>
-        <form id='login-form'>
+        <form id='login-form'onSubmit={e => this.handleSubmit(e)}>
           <label htmlFor='username'>Username:</label>
           <input 
             type='text'
             id='username'
+            name='username'
             required
           />
 
@@ -25,10 +50,11 @@ class Login extends React.Component {
           <input 
             type='password'
             id='password'
+            name='password'
             required
           />
           <div className='button-container'>
-            <button>Login</button>
+            <button type='submit'>Login</button>
             <button onClick={e => this.clickCancel(e)}>Cancel</button>
           </div>
         </form>

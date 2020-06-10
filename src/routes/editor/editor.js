@@ -1,105 +1,42 @@
 import React from 'react'
+import TokenService from '../../services/token-service'
+import PostsApiService from '../../services/posts-api-services'
 import EditorToolbar from '../../components/editorToolbar/editorToolbar'
 import './editor.css'
 
 export default class Editor extends React.Component {
-  format = (command, value)  => {
-    document.execCommand(command, false, value);
-  }
   
-  setUrl = (e) => {
-    e.preventDefault()
-    const url = document.getElementById('txtFormatUrl').value;
-    const show = document.getElementById('url-input')
-    const sText = document.getSelection();
-    // create an even called insert HTML 
-    document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank">' + sText + '</a>');
-    document.getElementById('txtFormatUrl').value = ''
-    show.classList.add('hidden')
+  handleSuccess() {
+    console.log(TokenService.readJwToken())
   }
 
-  addLink = () => {
-    const show = document.getElementById('url-input')
-    if (show.classList.contains('hidden')) {
-      show.classList.remove('hidden')
-    } else {
-      show.classList.add('hidden')
-    }
-  }
-
-  setTitle = () => {
-    const target = document.getSelection();
-    document.execCommand('insertHTML', false, '<h2>' + target + '</h2>')
-  }
-
-  addCodeBlock = () => {
-    const codeBlock = document.createElement('pre')
-    const target = document.getSelection()
-    console.log(target)
-    if (target.focusNode.nodeName.includes('#text') || 
-        target.focusNode.classList.contains('title') || 
-        target.focusNode.className.includes('codeBlock') ||
-        target.focusNode.className.includes('editor')) {
-      return
-    }
-    const id = `codeBlock-${document.getElementsByClassName('codeBlock').length + 1}`
-
-
-    codeBlock.classList.add('codeBlock')
-    codeBlock.addEventListener('paste', this.paste)
-    // co
-    codeBlock.setAttribute('id', `${id}`)
-    target.focusNode.replaceWith(codeBlock)
-    
-    this.addLineAfterBlock(id)
-  }
-
-  
-  addLineAfterBlock(id) {
-    const block = document.getElementById(`${id}`)
-    const div = document.createElement('div')
-    const br = document.createElement('br')
-    div.appendChild(br)
-    
-    if (!block) {
-      return
-    } else {
-      block.after(div)
-    }
-  }
-  
-  paste = (e) => {
-    e.preventDefault()
-    
-    const open = new RegExp('<', 'gi')
-    const close = new RegExp('>', 'gi')
-    const text = (e.originalEvent || e).clipboardData.getData('text/plain').replace(open, '&lt').replace(close, '&gt')
-    
-    document.execCommand('insertHTML', false, text)
-  }
-  
-  handleSubmit = () => {
+  handleSubmit = (publish) => {
     const content = document.getElementById('sampleeditor').innerHTML
     const title = document.getElementById('title').textContent
-    const id = Math.random() * Math.floor(100000)
+    const img = document.querySelector('img') || null
+
+    let post
+
+    publish
+      ? post = {
+          title,
+          content,
+          img,
+          published: true
+        }
+      : post = {
+          title,
+          content,
+          img,
+          published: false
+        } 
     
-    const post = {
-      id,
-      title,
-      date_created: new Date(),
-      date_modified: new Date(),
-      content,
-      user: {
-        id: 1,
-        username: 'jimbo',
-        img: 'https://picsum.photos/200',
-        bio: 'Hi my name is Jimmy and this is my bio'
-      }
-    } 
-    
-    console.log(post)
-    test = document.getElementById('test')
-    test.innerHTML = content
+    PostsApiService.postPost(post)
+      .then(res =>
+        !res.ok
+          ? res.json().then(e => Promise.reject(e))
+          : this.handleSuccess()  
+      )
   }
   
   render() {
@@ -107,18 +44,12 @@ export default class Editor extends React.Component {
     return (
       <React.Fragment>
         <EditorToolbar 
-          setUrl={this.setUrl} 
-          format={this.format} 
-          addLink={this.addLink}
           handleSubmit={this.handleSubmit} 
-          setTitle={this.setTitle}
-          addCodeBlock={this.addCodeBlock}
         />
 
-        {/*use textarea or article instead of div*/}
-        <div id='title' contentEditable='true' spellCheck='true' data-placeholder='Title...' className='title'>
+        <div id='title' contentEditable='true' spellCheck='true' placeholder='Title...' data-placeholder='Title...' className='title'>
         </div>
-        <div className='editor' id='sampleeditor' contentEditable='true' spellCheck='true' data-placeholder='Body...'>
+        <div className='editor' id='sampleeditor' contentEditable='true' placeholder='Body...' spellCheck='true' data-placeholder='Body...'>
         </div>
         <div id='test'></div> 
       </React.Fragment>
