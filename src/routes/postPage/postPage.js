@@ -1,5 +1,6 @@
 import React from 'react'
 import Context from '../../context'
+import PostsApiService from '../../services/posts-api-services'
 import {Link} from 'react-router-dom'
 import Comments from '../../components/comments/comments'
 import CommentForm from '../../components/commentForm/commentForm'
@@ -16,42 +17,66 @@ class PostPage extends React.Component {
   state = {
     post: {},
     comments: [],
-    user: {}
   }
 
   componentDidMount() {
     const { id } = this.props.match.params
-    const post = this.context.posts.filter(p => p.id === parseInt(id))[0]
-    const user = this.context.users.filter(u => u.id === post.user.id)[0]
-    const comments = this.context.comments.filter(c => c.post_id === parseInt(id))
+
+    PostsApiService.getPost(id)
+      .then(res => this.setState({
+        post: res
+      }))
+      .catch(err => console.log(err))
+
+    PostsApiService.getComments(id)
+      .then(res => this.setState({
+        comments: res
+      }))
+      .catch(err => console.log(err))
+  }
+
+  handleComment = (comment) => {
+    let comments = this.state.comments
+    comments.push(comment)
+    // console.log(comments)
+
     this.setState({
-      post,
-      comments,
-      user
+      comments: comments
     })
   }
 
   renderPost() {
-    const {post, comments, user} = this.state
+    const {post, comments } = this.state
+
+    const content = document.getElementById('content')
+    console.log(post.content)
+    if (content !== null) {
+      content.innerHTML = post.content
+    }
+
+    if(!post.user) {
+      return null
+    }
+    
     return (
       <React.Fragment>
         <section>
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
+          <h2 id='title'>{post.title}</h2>
+          <div id='content'></div>
           <section className='author-container'>
             <h3>Written by</h3>
             <div className='author-info'>
-              <Link to={`/user/${user.id}`}>
-                <img src={user.img} alt={`${user.username}'s profile icon`} className='author-img'></img>
+              <Link to={`/user/${post.user.id}`}>
+                <img src={post.user.img} alt={`${post.user.username}'s profile icon`} className='author-img'></img>
               </Link>
-              <p className='author-username'>{user.username}</p>
+              <p className='author-username'>{post.user.username}</p>
             </div>
-            <p>{user.bio}</p>
+            <p>{post.user.bio}</p>
           </section>
         </section>
         <section className='comment-section'>
           <h3>Comments</h3>
-          <CommentForm />
+          <CommentForm postId={post.id} handleComment={this.handleComment}/>
           <Comments comments={comments} />
         </section>
       </React.Fragment>

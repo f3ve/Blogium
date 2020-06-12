@@ -1,5 +1,6 @@
 import React from 'react'
-import Context from '../../context'
+// import Context from '../../context'
+import PostsApiService from '../../services/posts-api-services'
 import './userPage.css'
 import PostListItem from '../../components/postListItem/postListItem'
 
@@ -10,7 +11,7 @@ export default class UserPage extends React.Component {
     }
   }
 
-  static contextType = Context
+  // static contextType = Context
 
   state = {
     user: {},
@@ -18,13 +19,22 @@ export default class UserPage extends React.Component {
   }
 
   componentDidMount() {
-    const user = this.context.users.filter(u => u.id === parseInt(this.props.match.params.id))[0]
-    const posts = this.context.posts.filter(p => p.user.id === parseInt(this.props.match.params.id))
-
-    this.setState({
-      user,
-      posts
-    })
+    const {id} = this.props.match.params
+    PostsApiService.getUser(id)
+      .then(user => {
+        this.setState({
+          user
+        })
+      })
+      .catch(err => console.log(err))
+    
+    PostsApiService.getUsersPosts(id)
+      .then(posts => {
+        this.setState({
+          posts
+        })
+      })
+      .catch(err => console.log(err))
   }
 
   renderPage() {

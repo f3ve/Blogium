@@ -6,6 +6,9 @@
   position: fixed;
   top: 50px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
   .icon {
@@ -15,5 +18,9 @@
 
 .sample-toolbar > span:hover
 {
-    text-decoration:underline;
+  text-decoration:underline;
+}
+
+.hidden {
+  display: none;
 }

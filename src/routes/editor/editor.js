@@ -1,52 +1,105 @@
 import React from 'react'
+import TokenService from '../../services/token-service'
+import PostsApiService from '../../services/posts-api-services'
 import EditorToolbar from '../../components/editorToolbar/editorToolbar'
 import './editor.css'
 
 export default class Editor extends React.Component {
-  format = (command, value)  => {
-    document.execCommand(command, false, value);
+  state={}
+
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      PostsApiService.getPost(this.props.match.params.id)
+        .then(res => {
+          this.setState({
+            post: res
+          })
+        })
+        .then(() => {
+          const doc = document.getElementsByClassName('editor')
+
+          doc[0].innerHTML = this.state.post.content
+        })
+        .catch(err => console.log(err))
+    } else {
+      this.setState({})
+    }
   }
   
-  setUrl = () => {
-    const url = document.getElementById('txtFormatUrl').value;
-    const sText = document.getSelection();
-    document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank">' + sText + '</a>');
-    document.getElementById('txtFormatUrl').value = '';
+  handleSuccess(publish) {
+    const token = TokenService.readJwToken()
+    publish
+      ? this.props.history.push(`/user/${token.id}`)
+      : this.props.history.push(`/drafts`)
   }
-  
-  handleSubmit = () => {
+
+  stringToHTML = (str) => {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(str, 'text/html')
+    return doc.body
+  }
+
+  handleSubmit = (publish) => {
     const content = document.getElementById('sampleeditor').innerHTML
     const title = document.getElementById('title').textContent
-    const id = Math.random() * Math.floor(100000)
+    const img = document.querySelector('img') || null
 
-    const post = {
-      id,
-      title,
-      date_created: new Date(),
-      date_modified: new Date(),
-      content,
-      user: {
-        id: 1,
-        username: 'jimbo',
-        img: 'https://picsum.photos/200',
-        bio: 'Hi my name is Jimmy and this is my bio'
-      }
-    } 
+    let post
 
-    console.log(post)
+    publish
+      ? post = {
+          title,
+          content,
+          img: 'https://picsum.photos/200',
+          published: true
+        }
+      : post = {
+          title,
+          content,
+          img: 'https://picsum.photos/200',
+          published: false
+        }
+
+    !this.props.match.params.id
+      ? PostsApiService.postPost(post)
+        .then(res =>
+          !res.ok
+            ? res.json().then(e => Promise.reject(e))
+            : this.handleSuccess(publish)  
+        )
+        .catch(err => alert(err))
+      : PostsApiService.patchPost(post, this.props.match.params.id)
+          .then(res =>
+            !res.ok
+              ? res.json().then(e => Promise.reject(e))
+              : this.handleSuccess(publish)
+          )
+          .catch(err => alert(err))
   }
-
+  
   render() {
-    // window.addEventListener('load', function(){
-    //   document.getElementById('sampleeditor').setAttribute('contenteditable', 'true');
-    //   document.getElementById('sampleeditor2').setAttribute('contenteditable', 'true');
-    // });
+    window.addEventListener('keyup', this.press)
     return (
       <React.Fragment>
-        <EditorToolbar setUrl={this.setUrl} format={this.format} handleSubmit={this.handleSubmit} />
-        <div className='editor' id='sampleeditor' contentEditable='true'>
-          <h2 id='title'>Enter Your Title...</h2>
+        <EditorToolbar 
+          handleSubmit={this.handleSubmit} 
+        />
+
+        <div id='title' contentEditable='true' spellCheck='true' placeholder='Title...' data-placeholder='Title...' className='title'>
+          {
+            this.state.post
+              ? this.state.post.title
+              : null
+          }
         </div>
+        <div className='editor' id='sampleeditor' contentEditable='true' placeholder='Body...' spellCheck='true' data-placeholder='Body...'>
+          {/* {
+            this.state.post
+              ? this.state.post.content
+              : null
+          } */}
+        </div>
+        <div id='test'></div> 
       </React.Fragment>
     )
   }

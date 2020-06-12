@@ -7,8 +7,8 @@ function Comments(props) {
   return (
     <ul className='comments-list'>
       {
-        props.comments.map(c => {
-          const date = translateDate(c.date_created)
+        props.comments.reverse().map(c => {
+          // const date = translateDate(c.date_created)
           return (
             <li key={c.id} className='comment'>
               <div className='user-container'>
@@ -18,7 +18,7 @@ function Comments(props) {
                 <p>{c.user.username}</p>
               </div>
               <p>{c.content}</p>
-              <p>{date}</p>
+              {/* <p>{date}</p> */}
             </li>
           )
         })
