@@ -7,6 +7,18 @@ import './account.css'
 export default class Account extends React.Component {
   static contextType = Context
 
+  state = {
+    selectedtFile: null
+  }
+
+  // handleSubmit = 
+
+  fileSelectedHandler = e => {
+    this.setState({
+      selectedtFile: e.target.files[0]
+    })
+  }
+
   render() {
     const user = this.context.activeUser
     return (
@@ -14,7 +26,7 @@ export default class Account extends React.Component {
         <h2>{this.context.activeUser.username}</h2>
         <form className='account-form'>
           <label htmlFor='img'><img src={user.img} alt={`${user.username}'s icon`} className='userImg'/></label>
-          <input type='file' id='img'/>
+          <input type='file' id='img' onChange={e => this.fileSelectedHandler(e)} />
 
           <label htmlFor='full_name'>Name</label>
           <input type='text' id='full_name' defaultValue={user.full_name} />
