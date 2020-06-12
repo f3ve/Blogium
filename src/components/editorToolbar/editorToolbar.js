@@ -90,7 +90,8 @@ export default function EditorToolbar(props) {
       </div>
       <a href="javascript:void(0)" onClick={e => setTitle()}><FontAwesomeIcon icon='heading' className='icon' /></a>
       <a href="javascript:void(0)" onClick={e => addCodeBlock()}><FontAwesomeIcon icon='code' className='icon' /></a>
-      <a href="javascript:void(0)" onClick={e => handleSubmit()}><FontAwesomeIcon icon='plus' className='icon'/></a>
+      <a href="javascript:void(0)" onClick={e => handleSubmit()}>Save Draft</a>
+      <a href="javascript:void(0)" onClick={e => handleSubmit(true)}>Publish</a>
     </div>
   )
 }

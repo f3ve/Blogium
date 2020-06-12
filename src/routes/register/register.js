@@ -1,21 +1,29 @@
 import React from 'react'
 import AuthApiService from '../../services/auth-api-service'
+import TokenService from '../../services/token-service'
+import PostsApiService from '../../services/posts-api-services'
+import Context from '../../context'
 import { withRouter } from 'react-router-dom'
 import './register.css'
 
 class Register extends React.Component {
+  static contextType = Context
 
   handleSuccess = (username, password) => {
     const {history} = this.props
-    history.push()
     AuthApiService.postLogin({
       username,
       password
     })
       .then(res => {
+        const token = TokenService.readJwToken()
         username = ''
         password = ''
-        history.push('/editor')
+        
+        PostsApiService.getUser(token.id)
+        .then(u => {
+          this.context.setActiveUser(u, () => history.push(`/user/${token.id}/account`))
+        })
       })
       .catch(err => alert(err))
 
@@ -35,8 +43,6 @@ class Register extends React.Component {
       .then(u => {
         full_name.value = ''
         email.value = ''
-        // username.value = ''
-        // password.value = ''
         matchPassword.value = ''
         this.handleSuccess(username.value, password.value)
       })

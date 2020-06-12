@@ -6,8 +6,11 @@ const Context = React.createContext({
   comments: [],
   activeUser: {},
   error: null,
+  editPost: {},
   setActiveUser: () => {},
   clearActiveUser: () => {},
+  setEditPost: () => {},
+  clearEditPost: () => {},
   setError: () => {},
   clearError: () => {},
   setPosts: () => {}

@@ -78,14 +78,22 @@ class App extends React.Component{
     }, callBack())
   }
 
-  clearActiveUser = () => {
+  clearActiveUser = (callBack) => {
     this.setState({
       activeUser: {}
-    })
+    }, callBack())
   }
 
   clearError = () => {
     this.setState({error: null})
+  }
+
+  setEditPost = (post) => {
+    this.setState({editPost: post})
+  }
+
+  clearEditPost = (post) => {
+    this.setState({editPost: {}})
   }
 
   render() {
@@ -95,6 +103,9 @@ class App extends React.Component{
       comments: this.state.comments,
       activeUser: this.state.activeUser,
       error: this.state.error,
+      editPost: this.state.editPost,
+      setEditPost: this.setEditPost,
+      clearEditPost: this.clearEditPost,
       setActiveUser: this.setActiveUser,
       clearActiveUser: this.clearActiveUser,
       setError: this.setError,
@@ -124,11 +135,15 @@ class App extends React.Component{
                   component={PostPage}
                 />
                 <PrivateRoute
-                  path={'/editor'}
+                  exact path={'/editor'}
+                  component={Editor}
+                />
+                <PrivateRoute 
+                  path={'/editor/:id'}
                   component={Editor}
                 />
                 <Route
-                  path={'/user/:id'}
+                  exact path={'/user/:id'}
                   component={UserPage}
                 />
                 <PrivateRoute 
@@ -136,9 +151,8 @@ class App extends React.Component{
                   component={Drafts}
                 />
                 <PrivateRoute 
-                  path={'/account'}
+                  path={'/user/:id/account'}
                   component={Account}
-                  // user={this.state.user}
                 />
               </Switch>
             </main>

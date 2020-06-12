@@ -7,7 +7,8 @@
 .userImg {
   border: 1px solid black;
   width: 150px;
-  height: auto;
+  height: 150px;
+  object-fit: cover;
   border-radius: 75px;
 }
 

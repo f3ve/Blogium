@@ -84,15 +84,48 @@ const PostsApiService = {
     })
   },
 
-  patchUser(user) {
-    return fetch(`${config.API_BASE_URL}/${user.id}`, {
-      method: 'POST',
+  patchPost(post, postId) {
+    return fetch(`${config.API_BASE_URL}/posts/${postId}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(post)
+    })
+  },
+
+  patchUser(user, userId) {
+    return fetch(`${config.API_BASE_URL}/users/${userId}`, {
+      method: 'PATCH',
       headers: {
         'content-type': 'application/json',
         'Authorization': `Bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify(user)
     })
+    .then(res => 
+      !res.ok
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
+    )
+  },
+
+  // delete
+
+  deleteUser(userId) {
+    return fetch(`${config.API_BASE_URL}/users/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
+    // .then(res => 
+    //   !res.ok
+    //     ? res.json().then(e => Promise.reject(e))
+    //     // : res.json()  
+    // )
   }
 }
 

@@ -62,7 +62,7 @@ export default class Nav extends React.Component {
             <li><Link to={'/editor'}>Create a new post</Link></li>
             <li><Link to={'/drafts'}>View your drafts</Link></li>
             <li><Link to={`/user/${user.id}`}>View your page</Link></li>
-            <li><Link to={`/account`}>Edit your Account</Link></li>
+            <li><Link to={`/user/${user.id}/account`}>Edit your Account</Link></li>
             <li><Link onClick={e => {
               this.handleLogoutClick() 
               this.toggleMenu(e)

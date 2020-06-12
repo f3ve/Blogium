@@ -9,7 +9,13 @@ function PostListItem(props) {
 
   return (
     <li key={post.id} className='post-container'>
-      <Link to={`/post/${post.id}`}>
+      <Link 
+        to={
+          post.published === false
+            ? `/editor/${post.id}`
+            : `/post/${post.id}`
+        }
+      >
         <h2 className='postTitle'>{post.title}</h2>
       </Link>
       <p className='author'>By {post.user.username}</p>

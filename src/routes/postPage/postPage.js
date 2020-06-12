@@ -48,6 +48,12 @@ class PostPage extends React.Component {
   renderPost() {
     const {post, comments } = this.state
 
+    const content = document.getElementById('content')
+    console.log(post.content)
+    if (content !== null) {
+      content.innerHTML = post.content
+    }
+
     if(!post.user) {
       return null
     }
@@ -55,8 +61,8 @@ class PostPage extends React.Component {
     return (
       <React.Fragment>
         <section>
-          <h2>{post.title}</h2>
-          <p>{post.content}</p>
+          <h2 id='title'>{post.title}</h2>
+          <div id='content'></div>
           <section className='author-container'>
             <h3>Written by</h3>
             <div className='author-info'>

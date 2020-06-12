@@ -8,10 +8,6 @@ import TokenService from '../../services/token-service'
 class CommentForm extends React.Component {
   static contextType = Context
 
-  handleSuccess() {
-    this.props.handleComment()
-  }
-
   handleSubmit = e => {
     e.preventDefault()
     const content = document.getElementById('comment-input').value

@@ -5,9 +5,38 @@ import EditorToolbar from '../../components/editorToolbar/editorToolbar'
 import './editor.css'
 
 export default class Editor extends React.Component {
+  state={}
+
+  componentDidMount() {
+    if (this.props.match.params.id) {
+      PostsApiService.getPost(this.props.match.params.id)
+        .then(res => {
+          this.setState({
+            post: res
+          })
+        })
+        .then(() => {
+          const doc = document.getElementsByClassName('editor')
+
+          doc[0].innerHTML = this.state.post.content
+        })
+        .catch(err => console.log(err))
+    } else {
+      this.setState({})
+    }
+  }
   
-  handleSuccess() {
-    console.log(TokenService.readJwToken())
+  handleSuccess(publish) {
+    const token = TokenService.readJwToken()
+    publish
+      ? this.props.history.push(`/user/${token.id}`)
+      : this.props.history.push(`/drafts`)
+  }
+
+  stringToHTML = (str) => {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(str, 'text/html')
+    return doc.body
   }
 
   handleSubmit = (publish) => {
@@ -21,22 +50,31 @@ export default class Editor extends React.Component {
       ? post = {
           title,
           content,
-          img,
+          img: 'https://picsum.photos/200',
           published: true
         }
       : post = {
           title,
           content,
-          img,
+          img: 'https://picsum.photos/200',
           published: false
-        } 
-    
-    PostsApiService.postPost(post)
-      .then(res =>
-        !res.ok
-          ? res.json().then(e => Promise.reject(e))
-          : this.handleSuccess()  
-      )
+        }
+
+    !this.props.match.params.id
+      ? PostsApiService.postPost(post)
+        .then(res =>
+          !res.ok
+            ? res.json().then(e => Promise.reject(e))
+            : this.handleSuccess(publish)  
+        )
+        .catch(err => alert(err))
+      : PostsApiService.patchPost(post, this.props.match.params.id)
+          .then(res =>
+            !res.ok
+              ? res.json().then(e => Promise.reject(e))
+              : this.handleSuccess(publish)
+          )
+          .catch(err => alert(err))
   }
   
   render() {
@@ -48,8 +86,18 @@ export default class Editor extends React.Component {
         />
 
         <div id='title' contentEditable='true' spellCheck='true' placeholder='Title...' data-placeholder='Title...' className='title'>
+          {
+            this.state.post
+              ? this.state.post.title
+              : null
+          }
         </div>
         <div className='editor' id='sampleeditor' contentEditable='true' placeholder='Body...' spellCheck='true' data-placeholder='Body...'>
+          {/* {
+            this.state.post
+              ? this.state.post.content
+              : null
+          } */}
         </div>
         <div id='test'></div> 
       </React.Fragment>
