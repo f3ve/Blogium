@@ -26,13 +26,13 @@ class PostPage extends React.Component {
       .then(res => this.setState({
         post: res
       }))
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
 
     PostsApiService.getComments(id)
       .then(res => this.setState({
         comments: res
       }))
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
   }
 
   handleComment = (comment) => {

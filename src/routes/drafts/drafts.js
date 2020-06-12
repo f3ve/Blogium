@@ -11,7 +11,7 @@ class Drafts extends React.Component {
   componentDidMount() {
     PostsApiService.getDrafts()
       .then(drafts => this.setState({drafts}))
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
   }
 
   renderDrafts() {

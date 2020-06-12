@@ -26,7 +26,7 @@ export default class UserPage extends React.Component {
           user
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
     
     PostsApiService.getUsersPosts(id)
       .then(posts => {
@@ -34,7 +34,7 @@ export default class UserPage extends React.Component {
           posts
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
   }
 
   renderPage() {

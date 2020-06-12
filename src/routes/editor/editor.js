@@ -20,7 +20,7 @@ export default class Editor extends React.Component {
 
           doc[0].innerHTML = this.state.post.content
         })
-        .catch(err => console.log(err))
+        .catch(err => alert(err))
     } else {
       this.setState({})
     }

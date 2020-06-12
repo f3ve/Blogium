@@ -33,17 +33,15 @@ export default class Account extends React.Component {
     const img = this.state.selectedFile
 
     if (img.type !== 'image/png') {
-      console.log('You must upload an image')
+      alert('You must upload an image')
     }
-    console.log('img upload started')
-    console.log(img)
 
     const uploadTask = storage.ref(`/images/${img.name}`).put(img)
 
     uploadTask.on('state_changed', (snapshot) => {
       console.log(snapshot)
     }, (err) => {
-      console.log(err)
+      alert(err)
     }, () => {
       storage.ref('images').child(img.name).getDownloadURL()
         .then(url => {
@@ -56,10 +54,9 @@ export default class Account extends React.Component {
 
           PostsApiService.patchUser(newUser, userId)
             .then(res => {
-              console.log(res)
               this.onSuccessfulUpdate(res)()
             })
-            .catch(err => console.log(err))
+            .catch(err => alert(err))
         })
     })
   }
@@ -101,7 +98,6 @@ export default class Account extends React.Component {
     }
     PostsApiService.patchUser(updateUser, this.props.match.params.id)
     .then(res => {
-      console.log(res)
       this.onSuccessfulUpdate(res)
     })
       .catch(err => alert(err))
@@ -118,10 +114,9 @@ export default class Account extends React.Component {
 
     PostsApiService.patchUser(updateUser, this.context.activeUser.id)
     .then(res => {
-      console.log(res)
       this.onSuccessfulUpdate(res)
     })
-      .catch(e => console.log(e))
+      .catch(e => alert(e))
   }
 
   handleUpdateBio = e => {
@@ -133,10 +128,9 @@ export default class Account extends React.Component {
 
     PostsApiService.patchUser(updateUser, this.context.activeUser.id)
     .then(user => {
-      console.log(user)
       this.onSuccessfulUpdate(user)
     })
-      .catch(e => console.log(e))
+      .catch(e => alert(e))
   }
 
   onSuccessfulUpdate = (user) => {
@@ -166,7 +160,7 @@ export default class Account extends React.Component {
           ? res.json().then(res => Promise.reject(res))
           : this.onSuccessfulDelete()
       })
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
   }
 
   render() {

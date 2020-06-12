@@ -22,7 +22,7 @@ static contextType = Context
       .then(u => {
         this.context.setActiveUser(u, () => this.props.history.push(destination))
       })
-      .catch(err => console.log(err))
+      .catch(err => alert(err))
   }
 
   handleSubmit(e) {
