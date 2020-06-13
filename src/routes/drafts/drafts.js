@@ -9,14 +9,20 @@ class Drafts extends React.Component {
   }
 
   componentDidMount() {
+    this.context.clearError()
     PostsApiService.getDrafts()
       .then(drafts => this.setState({drafts}))
-      .catch(err => alert(err))
+      .catch(err => this.context.setError(err.error))
   }
 
   renderDrafts() {
     return (
       <ul className='post-list'>
+        {
+          this.context.error !== null
+            ? <p className='error'>{this.context.error}</p>
+            : null
+        }
         {
           this.state.drafts.map(p => {
             return <PostListItem post={p} key={p.id} />

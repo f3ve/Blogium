@@ -11,7 +11,7 @@ class Main extends React.Component {
     this.context.clearError()
     PostsApiService.getPosts()
       .then(this.context.setPosts)
-      .catch(err => alert(err))
+      .catch(err => this.context.setError(err.error))
   }
 
   render() {

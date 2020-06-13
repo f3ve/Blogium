@@ -1,11 +1,11 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import Context from '../../context'
 import TokenService from '../../services/token-service'
 import IdleService from '../../services/idle-services'
 import './nav.css'
 
-export default class Nav extends React.Component {
+class Nav extends React.Component {
   static contextType = Context
 
   handleLogoutClick = () => {
@@ -13,7 +13,7 @@ export default class Nav extends React.Component {
     TokenService.clearCallbackBeforeExpirey()
     IdleService.unRegisterIdleResets()
     this.context.clearActiveUser()
-    this.forceUpdate()
+    this.props.history.push('/')
   }
 
   renderLoginLink() {
@@ -74,3 +74,5 @@ export default class Nav extends React.Component {
     )
   }
 }
+
+export default withRouter(Nav)

@@ -3,12 +3,14 @@ import TokenService from '../../services/token-service'
 import Context from '../../context'
 import {storage} from '../../firebase/firebase'
 import PostsApiService from '../../services/posts-api-services'
+import ValidationError from '../../ValidationError'
 import './account.css'
 
 export default class Account extends React.Component {
   static contextType = Context
 
   state = {
+    url: '',
     selectedFile: null,
     full_name: {
       value: '',
@@ -22,10 +24,6 @@ export default class Account extends React.Component {
       value: '',
       changed: false
     },
-    img: {
-      context: '',
-      changed: false
-    }
   }
 
   upLoadImg = (e, userId) => {
@@ -33,7 +31,7 @@ export default class Account extends React.Component {
     const img = this.state.selectedFile
 
     if (img.type !== 'image/png') {
-      alert('You must upload an image')
+      this.context.setError('You must upload an image')
     }
 
     const uploadTask = storage.ref(`/images/${img.name}`).put(img)
@@ -41,7 +39,7 @@ export default class Account extends React.Component {
     uploadTask.on('state_changed', (snapshot) => {
       console.log(snapshot)
     }, (err) => {
-      alert(err)
+      this.context.setError(err)
     }, () => {
       storage.ref('images').child(img.name).getDownloadURL()
         .then(url => {
@@ -56,14 +54,14 @@ export default class Account extends React.Component {
             .then(res => {
               this.onSuccessfulUpdate(res)()
             })
-            .catch(err => alert(err))
+            .catch(err => this.context.setError(err.error))
         })
     })
   }
 
   updateName = (e) => {
     this.setState({
-      fullname: {
+      full_name: {
         value: e.target.value,
         changed: true
       }
@@ -88,11 +86,32 @@ export default class Account extends React.Component {
     })
   }
 
+  validateName() {
+    const name = this.state.full_name.value
+    if (name.length < 3) {
+      return 'Your name must be longer than 3 characters'
+    }
+  }
+
+  validateEmail() {
+    const email = this.state.email.value
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+      return 'You must enter a valid email'
+    }
+  }
+
+
   handleUpdateName = (e) => {
     e.preventDefault()
 
-    const full_name = document.getElementById('full_name').value
+    this.setState({
+      full_name: {
+        value: this.state.full_name,
+        changed: false
+      }
+    })
 
+    const full_name = this.state.full_name.value
     const updateUser = {
       full_name
     }
@@ -100,14 +119,20 @@ export default class Account extends React.Component {
     .then(res => {
       this.onSuccessfulUpdate(res)
     })
-      .catch(err => alert(err))
+      .catch(err => this.context.setError(err))
   }
 
   handleUpdateEmail = (e) => {
     e.preventDefault()
-    
-    const email = document.getElementById('email').value
 
+    this.setState({
+      email: {
+        value: this.state.email.value,
+        changed: false
+      }
+    })
+    
+    const email = this.state.email.value
     const updateUser = {
       email
     }
@@ -116,12 +141,18 @@ export default class Account extends React.Component {
     .then(res => {
       this.onSuccessfulUpdate(res)
     })
-      .catch(e => alert(e))
+      .catch(e => this.context.setError(e))
   }
 
   handleUpdateBio = e => {
     e.preventDefault()
-    const bio = document.getElementById('bio').value
+    this.setState({
+      bio: {
+        value: this.state.bio,
+        changed: false
+      }
+    })
+    const bio = this.state.bio.value
     const updateUser = {
       bio
     }
@@ -130,11 +161,12 @@ export default class Account extends React.Component {
     .then(user => {
       this.onSuccessfulUpdate(user)
     })
-      .catch(e => alert(e))
+      .catch(e => this.context.setError(e.error))
   }
 
   onSuccessfulUpdate = (user) => {
-    this.context.setActiveUser(user, () => console.log('yay!'))
+    this.context.clearError()
+    this.context.setActiveUser(user, () => this.context.setError('Update Successful'))
   }
 
 
@@ -147,6 +179,7 @@ export default class Account extends React.Component {
   onSuccessfulDelete = () => {
     TokenService.clearAuthToken()
     TokenService.clearCallbackBeforeExpirey()
+    this.context.clearError()
     this.context.clearActiveUser(
       () => this.props.history.push('/')
     )
@@ -160,7 +193,7 @@ export default class Account extends React.Component {
           ? res.json().then(res => Promise.reject(res))
           : this.onSuccessfulDelete()
       })
-      .catch(err => alert(err))
+      .catch(err => this.context.setError(err))
   }
 
   render() {
@@ -175,15 +208,48 @@ export default class Account extends React.Component {
 
           <label htmlFor='full_name'>Name</label>
           <input type='text' id='full_name' defaultValue={user.full_name} onChange={e => this.updateName(e)}/>
-          <button onClick={e => this.handleUpdateName(e)}>update name</button>
+          {
+            this.state.full_name.changed && (
+              <ValidationError message={this.validateName()} />
+            )
+          }
+          <button 
+            onClick={e => this.handleUpdateName(e)}
+            disabled={
+              this.validateName() || 
+              this.state.full_name.changed === false
+            }
+          >
+            update name
+          </button>
 
           <label htmlFor='email'>email</label>
-          <input type='email' id='email' defaultValue={user.email} />
-          <button onClick={e => this.handleUpdateEmail(e)}>update email</button>
+          <input type='email' id='email' defaultValue={user.email} onChange={e => this.updateEmail(e)} />
+          {
+            this.state.email.changed && (
+              <ValidationError message={this.validateEmail()} />
+            )
+          }
+          <button 
+            onClick={e => this.handleUpdateEmail(e)}
+            disabled={
+              this.validateEmail() ||
+              this.state.email.changed === false
+            }
+          >
+            update email
+          </button>
 
           <label htmlFor='bio'>Bio</label>
-          <textarea id={'bio'} defaultValue={user.bio}></textarea>
-          <button onClick={e => this.handleUpdateBio(e)}>update bio</button>
+          <textarea id={'bio'} defaultValue={user.bio} onChange={e => this.updateBio(e)}></textarea>
+          <button 
+            onClick={e => this.handleUpdateBio(e)}
+            disabled={
+              this.state.bio.changed === false
+            }
+          >
+            update bio
+          </button>
 
           <button className='delete' onClick={e=> this.handleDelete(e, user.id)}>delete account</button>
         </form>

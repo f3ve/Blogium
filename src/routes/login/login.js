@@ -17,12 +17,13 @@ static contextType = Context
   handleSuccess() {
     const destination = (this.props.location.state || {}).from || '/'
     const token = TokenService.readJwToken()
+    this.context.clearError()
 
     PostsApiService.getUser(token.id)
       .then(u => {
         this.context.setActiveUser(u, () => this.props.history.push(destination))
       })
-      .catch(err => alert(err))
+      .catch(err => this.context.setError(err.error))
   }
 
   handleSubmit(e) {
@@ -39,7 +40,7 @@ static contextType = Context
         password.value = ''
         this.handleSuccess()
       })
-      .catch(res => alert(res.error))
+      .catch(res => this.context.setError(res.error))
   }
 
   render() {
@@ -66,6 +67,11 @@ static contextType = Context
             <button type='submit'>Login</button>
             <button onClick={e => this.clickCancel(e)}>Cancel</button>
           </div>
+          {
+            this.context.error !== null 
+              ? <p className='error'>{this.context.error}</p>
+              :null
+          }
         </form>
       </section>
     )

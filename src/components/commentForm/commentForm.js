@@ -23,6 +23,7 @@ class CommentForm extends React.Component {
           ? res.json().then(e => Promise.reject(e))
           : res.json().then(r => this.props.handleComment(r))
       )
+      .catch(err => this.context.setError(err.error))
   }
 
   renderLoginLinks() {
@@ -30,7 +31,7 @@ class CommentForm extends React.Component {
       <p>
         <Link to={'/login'}>Log in </Link>
         or
-        <Link to={'/register'}> creant an account </Link>
+        <Link to={'/register'}>Create an account </Link>
         to leave a comment
       </p>
     )

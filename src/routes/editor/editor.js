@@ -20,7 +20,7 @@ export default class Editor extends React.Component {
 
           doc[0].innerHTML = this.state.post.content
         })
-        .catch(err => alert(err))
+        .catch(err => this.context.setError(err))
     } else {
       this.setState({})
     }
@@ -28,15 +28,10 @@ export default class Editor extends React.Component {
   
   handleSuccess(publish) {
     const token = TokenService.readJwToken()
+    this.context.clearError()
     publish
       ? this.props.history.push(`/user/${token.id}`)
       : this.props.history.push(`/drafts`)
-  }
-
-  stringToHTML = (str) => {
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(str, 'text/html')
-    return doc.body
   }
 
   handleSubmit = (publish) => {
@@ -67,14 +62,14 @@ export default class Editor extends React.Component {
             ? res.json().then(e => Promise.reject(e))
             : this.handleSuccess(publish)  
         )
-        .catch(err => alert(err))
+        .catch(err => this.context.setError(err.error))
       : PostsApiService.patchPost(post, this.props.match.params.id)
           .then(res =>
             !res.ok
               ? res.json().then(e => Promise.reject(e))
               : this.handleSuccess(publish)
           )
-          .catch(err => alert(err))
+          .catch(err => this.context.setError(err.error))
   }
   
   render() {
@@ -84,7 +79,11 @@ export default class Editor extends React.Component {
         <EditorToolbar 
           handleSubmit={this.handleSubmit} 
         />
-
+        {
+          this.context.error !== null
+            ? <p className='error'>{this.context.error}</p>
+            : null
+        }
         <div id='title' contentEditable='true' spellCheck='true' placeholder='Title...' data-placeholder='Title...' className='title'>
           {
             this.state.post

@@ -21,6 +21,7 @@ class PostPage extends React.Component {
 
   componentDidMount() {
     const { id } = this.props.match.params
+    this.context.clearError()
 
     PostsApiService.getPost(id)
       .then(res => this.setState({
@@ -32,13 +33,13 @@ class PostPage extends React.Component {
       .then(res => this.setState({
         comments: res
       }))
-      .catch(err => alert(err))
+      .catch(err => this.context.setError(err))
   }
 
   handleComment = (comment) => {
     let comments = this.state.comments
+    this.context.clearError()
     comments.push(comment)
-    // console.log(comments)
 
     this.setState({
       comments: comments
@@ -49,7 +50,6 @@ class PostPage extends React.Component {
     const {post, comments } = this.state
 
     const content = document.getElementById('content')
-    console.log(post.content)
     if (content !== null) {
       content.innerHTML = post.content
     }
@@ -77,6 +77,11 @@ class PostPage extends React.Component {
         <section className='comment-section'>
           <h3>Comments</h3>
           <CommentForm postId={post.id} handleComment={this.handleComment}/>
+          {
+            this.context.error !== null
+              ? <p className='error'>{this.context.error}</p>
+              : null
+          }
           <Comments comments={comments} />
         </section>
       </React.Fragment>
@@ -84,7 +89,6 @@ class PostPage extends React.Component {
   }
   
   render() {
-    // const {post, comments, user} = this.state
     return (
       <React.Fragment>
         {
