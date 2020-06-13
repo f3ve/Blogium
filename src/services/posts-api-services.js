@@ -1,6 +1,5 @@
 import TokenService from './token-service'
 import config from '../config'
-import Context from '../context'
 
 const PostsApiService = {
   getPosts() {
