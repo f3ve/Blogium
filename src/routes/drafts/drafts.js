@@ -1,9 +1,12 @@
 import React from 'react'
 import PostsApiService from '../../services/posts-api-services'
 import PostListItem from '../../components/postListItem/postListItem'
+import Context from '../../context'
 import './drafts.css'
 
 class Drafts extends React.Component {
+  static contextType = Context
+
   state = {
     drafts: []
   }

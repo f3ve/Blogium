@@ -1,12 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
+import {BrowserRouter} from 'react-router-dom'
 import CommentForm from './commentForm'
 
 describe('CommentForm', () => {
   it('renders wihtout crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(
-      <CommentForm />,
+      <BrowserRouter>
+        <CommentForm />
+      </BrowserRouter>,
       div
     )
     ReactDOM.unmountComponentAtNode(div)

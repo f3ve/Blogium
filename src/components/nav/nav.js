@@ -6,6 +6,9 @@ import IdleService from '../../services/idle-services'
 import './nav.css'
 
 class Nav extends React.Component {
+  static defaultProps = {
+    user: {}
+  }
   static contextType = Context
 
   handleLogoutClick = () => {

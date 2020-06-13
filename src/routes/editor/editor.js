@@ -5,6 +5,11 @@ import EditorToolbar from '../../components/editorToolbar/editorToolbar'
 import './editor.css'
 
 export default class Editor extends React.Component {
+  static defaultProps = {
+    match: {
+      params: {}
+    }
+  }
   state={}
 
   componentDidMount() {
