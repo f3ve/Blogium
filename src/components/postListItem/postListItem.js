@@ -5,7 +5,7 @@ import './postListItem.css'
 
 function PostListItem(props) {
   const {post} = props
-  // const date = translateDate(post.date_created)
+  const date = translateDate(new Date(post.date_created))
 
   return (
     <li key={post.id} className='post-container'>
@@ -26,7 +26,7 @@ function PostListItem(props) {
       </Link>
       <p className='author'>By {post.user.username}</p>
         <img src={post.img} alt='blog post img' className='postImg' />
-        {/* <p>Posted on: {date}</p> */}
+        <p>Posted on: {date}</p>
     </li>
   )
 }

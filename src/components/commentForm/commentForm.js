@@ -34,7 +34,7 @@ class CommentForm extends React.Component {
       <p>
         <Link to={'/login'}>Log in </Link>
         or
-        <Link to={'/register'}>Create an account </Link>
+        <Link to={'/register'}> Create an account</Link>
         to leave a comment
       </p>
     )
