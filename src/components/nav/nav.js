@@ -60,17 +60,13 @@ class Nav extends React.Component {
             : this.renderLoginLink()
           }
         </header>
-        <nav className='hiddenMenu'>
+        <nav className='hiddenMenu' onClick={e => this.toggleMenu(e)}>
           <ul>
             <li><Link to={'/editor'}>Create a new post</Link></li>
             <li><Link to={'/drafts'}>View your drafts</Link></li>
             <li><Link to={`/user/${user.id}`}>View your page</Link></li>
             <li><Link to={`/user/${user.id}/account`}>Edit your Account</Link></li>
-            <li><Link onClick={e => {
-              this.handleLogoutClick() 
-              this.toggleMenu(e)
-            }
-          }>Logout</Link></li>
+            <li><Link onClick={e => this.handleLogoutClick()}>Logout</Link></li>
           </ul>
         </nav>
       </React.Fragment>
