@@ -28,7 +28,7 @@ class Drafts extends React.Component {
         }
         {
           this.state.drafts.map(p => {
-            return <PostListItem post={p} key={p.id} />
+            return <PostListItem post={p} key={p.id} buttons={true}/>
           })
         }
       </ul>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Context from '../../context'
 import PostsApiService from '../../services/posts-api-services'
+import TokenService from '../../services/token-service'
 import './userPage.css'
 import PostListItem from '../../components/postListItem/postListItem'
 
@@ -40,6 +41,7 @@ export default class UserPage extends React.Component {
 
   renderPage() {
     const {user, posts} = this.state
+    const token = TokenService.readJwToken()
     return (
       <React.Fragment >
         <section className='profile-header'>
@@ -50,7 +52,9 @@ export default class UserPage extends React.Component {
         <section className='user-posts'>
           <ul className='post-list'>
             {posts.map(p => 
-              <PostListItem post={p} />
+              user.id === token.id
+                ? <PostListItem post={p} buttons={true}/>
+                : <PostListItem post={p} />
               )}
           </ul>
         </section>
