@@ -16,7 +16,13 @@ function PostListItem(props) {
             : `/post/${post.id}`
         }
       >
-        <h2 className='postTitle'>{post.title}</h2>
+        <h2 className='postTitle'>
+          {
+            post.title === ''
+              ? 'Untitled'
+              : post.title
+          }
+        </h2>
       </Link>
       <p className='author'>By {post.user.username}</p>
         <img src={post.img} alt='blog post img' className='postImg' />

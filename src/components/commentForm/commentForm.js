@@ -21,7 +21,10 @@ class CommentForm extends React.Component {
       .then(res => 
         !res.ok
           ? res.json().then(e => Promise.reject(e))
-          : res.json().then(r => this.props.handleComment(r))
+          : res.json().then(r => {
+            document.querySelector('#comment-input').value = ''
+            this.props.handleComment(r)
+          })
       )
       .catch(err => this.context.setError(err.error))
   }

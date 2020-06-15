@@ -1,10 +1,13 @@
 import React from 'react'
 import TokenService from '../../services/token-service'
 import PostsApiService from '../../services/posts-api-services'
+import Context from '../../context'
 import EditorToolbar from '../../components/editorToolbar/editorToolbar'
 import './editor.css'
 
 export default class Editor extends React.Component {
+  static contextType = Context
+
   static defaultProps = {
     match: {
       params: {}
@@ -13,6 +16,7 @@ export default class Editor extends React.Component {
   state={}
 
   componentDidMount() {
+    this.context.clearError()
     if (this.props.match.params.id) {
       PostsApiService.getPost(this.props.match.params.id)
         .then(res => {
@@ -39,10 +43,44 @@ export default class Editor extends React.Component {
       : this.props.history.push(`/drafts`)
   }
 
+  validateTitle(title) {
+    if (title === '') {
+      return 'Your post must have a title to be published'
+    }
+
+    if (title.length < 4) {
+      return 'Your title must be at least 4 characters long.'
+    }
+  }
+
+  validateContent(content) {
+    if(content === '') {
+      return 'You must have some content in order to publish your post'
+    }
+
+    if (content.length < 400) {
+      return 'Your post needs to have at least 400 characters in order to publish it. Add some more content or save it as a draft to come back later.'
+    }
+  }
+
   handleSubmit = (publish) => {
     const content = document.getElementById('sampleeditor').innerHTML
     const title = document.getElementById('title').textContent
-    const img = document.querySelector('img') || null
+    // const img = document.querySelector('img') || null
+
+    console.log(content.length)
+    const titleErr = this.validateTitle(title)
+    const contentErr = this.validateContent(content)
+
+    if(publish && titleErr) {
+      this.context.setError(titleErr)
+      return
+    }
+
+    if (publish && contentErr) {
+      this.context.setError(contentErr)
+      return
+    }
 
     let post
 
@@ -59,7 +97,7 @@ export default class Editor extends React.Component {
           img: 'https://picsum.photos/200',
           published: false
         }
-
+ 
     !this.props.match.params.id
       ? PostsApiService.postPost(post)
         .then(res =>
