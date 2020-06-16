@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  /* font-family: 'Lora'; */
 }
 
 .comments-list, .post-list {
@@ -20,4 +21,12 @@ main {
   flex-direction: row-reverse;
   align-self: center;
   margin: 5px;
+}
+
+#title {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#content, #sampleeditor {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }

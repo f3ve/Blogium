@@ -12,6 +12,10 @@ header {
   background-color: lightgray;
 }
 
+h1 {
+  font-family: 'Abril Fatface';
+}
+
 .hiddenMenu {
   position: fixed;
   top: -150px;
