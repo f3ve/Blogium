@@ -36,6 +36,19 @@ class PostPage extends React.Component {
       .catch(err => this.context.setError(err))
   }
 
+  onDeleteComment = () => {
+    const { id } = this.props.match.params
+    PostsApiService.getComments(id)
+      .then(res => this.setState({
+        comments: res
+      }))
+      .catch(err => this.context.setError(err.error))
+  }
+
+  onFail = (error) => {
+    this.context.setError(error)
+  }
+
   handleComment = (comment) => {
     let comments = this.state.comments
     this.context.clearError()
@@ -82,7 +95,17 @@ class PostPage extends React.Component {
               ? <p className='error'>{this.context.error}</p>
               : null
           }
-          <Comments comments={comments} />
+          {
+            comments.length === 0 
+              ? <p>No one has commented yet. Be the first!</p>
+              : <Comments 
+                  comments={comments} 
+                  authorId={post.user.id}
+                  onDelete={this.onDeleteComment}
+                  onFail={this.onFail}
+                />
+          }
+          
         </section>
       </React.Fragment>
     )

@@ -128,6 +128,16 @@ const PostsApiService = {
         'Authorization': `Bearer ${TokenService.getAuthToken()}`
       }
     })
+  },
+
+  deleteComment(cId) {
+    return fetch(`${config.API_BASE_URL}/comments/${cId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
   }
 }
 

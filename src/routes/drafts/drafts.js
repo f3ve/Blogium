@@ -3,7 +3,6 @@ import PostsApiService from '../../services/posts-api-services'
 import PostListItem from '../../components/postListItem/postListItem'
 import Context from '../../context'
 import './drafts.css'
-import { roundToNearestMinutesWithOptions } from 'date-fns/fp'
 
 class Drafts extends React.Component {
   static contextType = Context

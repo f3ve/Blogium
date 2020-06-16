@@ -1,9 +1,31 @@
 import React from 'react'
 import {translateDate} from '../utils/utils'
 import {Link} from 'react-router-dom'
+import TokenService from '../../services/token-service'
+import PostsApiService from '../../services/posts-api-services'
 import './comments.css'
 
 function Comments(props) {
+  const activeUserId= TokenService.readJwToken().id
+  const {authorId} = props
+  const {onDelete} = props
+  const {onFail} = props
+
+  function handleDelete(e, cId) {
+    e.preventDefault()
+    PostsApiService.deleteComment(cId)
+      .then(res => {
+        !res.ok
+          ? res.json().then(res => Promise.reject(res))
+          : onDelete()
+      })
+      .catch(err => onFail(err.error))
+  }
+
+  function renderDeleteButton(cId) {
+    return <button onClick={e => handleDelete(e, cId)}>Delete</button>
+  }
+  
   return (
     <ul className='comments-list'>
       {
@@ -19,6 +41,11 @@ function Comments(props) {
               </div>
               <p>{c.content}</p>
               <p>{date}</p>
+              {
+                activeUserId === c.user.id || activeUserId === authorId
+                  ? renderDeleteButton(c.id)
+                  : null
+              }
             </li>
           )
         })
