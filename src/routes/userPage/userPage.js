@@ -39,6 +39,17 @@ export default class UserPage extends React.Component {
       .catch(err => this.context.setError(err.error))
   }
 
+  onSuccessfulDelete = () => {
+    const {id} = this.props.match.params
+    PostsApiService.getUsersPosts(id)
+      .then(posts => {
+        this.setState({
+          posts
+        })
+      })
+      .catch(err => this.context.setError(err.error))
+  }
+
   renderPage() {
     const {user, posts} = this.state
     const token = TokenService.readJwToken()
@@ -53,8 +64,8 @@ export default class UserPage extends React.Component {
           <ul className='post-list'>
             {posts.map(p => 
               user.id === token.id
-                ? <PostListItem post={p} buttons={true}/>
-                : <PostListItem post={p} />
+                ? <PostListItem post={p} buttons={true} onSuccessfulDelete={this.onSuccessfulDelete}/>
+                : <PostListItem post={p} onSuccessfulDelete={this.onSuccessfulDelete}/>
               )}
           </ul>
         </section>

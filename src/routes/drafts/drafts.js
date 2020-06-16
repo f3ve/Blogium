@@ -3,6 +3,7 @@ import PostsApiService from '../../services/posts-api-services'
 import PostListItem from '../../components/postListItem/postListItem'
 import Context from '../../context'
 import './drafts.css'
+import { roundToNearestMinutesWithOptions } from 'date-fns/fp'
 
 class Drafts extends React.Component {
   static contextType = Context
@@ -12,6 +13,13 @@ class Drafts extends React.Component {
   }
 
   componentDidMount() {
+    this.context.clearError()
+    PostsApiService.getDrafts()
+      .then(drafts => this.setState({drafts}))
+      .catch(err => this.context.setError(err.error))
+  }
+
+  onSuccessfulDelete = () => {
     this.context.clearError()
     PostsApiService.getDrafts()
       .then(drafts => this.setState({drafts}))
@@ -28,7 +36,7 @@ class Drafts extends React.Component {
         }
         {
           this.state.drafts.map(p => {
-            return <PostListItem post={p} key={p.id} buttons={true}/>
+            return <PostListItem post={p} key={p.id} buttons={true} onSuccessfulDelete={this.onSuccessfulDelete}/>
           })
         }
       </ul>

@@ -110,21 +110,24 @@ const PostsApiService = {
     )
   },
 
-  // delete
-
   deleteUser(userId) {
     return fetch(`${config.API_BASE_URL}/users/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-ty{pe': 'application/json',
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
+  },
+
+  deletePost(postId) {
+    return fetch(`${config.API_BASE_URL}/posts/${postId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
         'Authorization': `Bearer ${TokenService.getAuthToken()}`
       }
     })
-    // .then(res => 
-    //   !res.ok
-    //     ? res.json().then(e => Promise.reject(e))
-    //     // : res.json()  
-    // )
   }
 }
 

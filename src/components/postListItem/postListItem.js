@@ -3,12 +3,20 @@ import { Link, withRouter} from 'react-router-dom'
 import Context from '../../context'
 import {translateDate} from '../utils/utils'
 import './postListItem.css'
+import PostsApiService from '../../services/posts-api-services'
 
 class PostListItem extends React.Component {
  static contextType = Context
   
   handleDelete(e) {
     e.preventDefault()
+    PostsApiService.deletePost(this.props.post.id)
+      .then(res => {
+        !res.ok
+          ? res.json().then(res => Promise.reject(res))
+          : this.props.onSuccessfulDelete()
+      })
+      .catch(err => this.context.setError(err.error))
   }
 
   handleEdit = (e) => {
