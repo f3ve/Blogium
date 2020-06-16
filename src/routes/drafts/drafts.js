@@ -1,5 +1,6 @@
 import React from 'react'
 import PostsApiService from '../../services/posts-api-services'
+import {Link} from 'react-router-dom'
 import PostListItem from '../../components/postListItem/postListItem'
 import Context from '../../context'
 import './drafts.css'
@@ -47,7 +48,7 @@ class Drafts extends React.Component {
       <React.Fragment>
         {
           this.state.drafts.length === 0
-            ? <h2>Loading</h2>
+            ? <p>No drafts. <Link to='/editor'>Create a new post.</Link></p>
             : this.renderDrafts()
         }
       </React.Fragment>

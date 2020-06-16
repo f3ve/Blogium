@@ -4,6 +4,7 @@ import PostsApiService from '../../services/posts-api-services'
 import TokenService from '../../services/token-service'
 import './userPage.css'
 import PostListItem from '../../components/postListItem/postListItem'
+import { Link } from 'react-router-dom'
 
 export default class UserPage extends React.Component {
   static defaultProps = {
@@ -52,7 +53,7 @@ export default class UserPage extends React.Component {
 
   renderPage() {
     const {user, posts} = this.state
-    const token = TokenService.readJwToken()
+    const {activeUser} = this.context
     return (
       <React.Fragment >
         <section className='profile-header'>
@@ -62,11 +63,17 @@ export default class UserPage extends React.Component {
         </section>
         <section className='user-posts'>
           <ul className='post-list'>
-            {posts.map(p => 
-              user.id === token.id
-                ? <PostListItem post={p} buttons={true} onSuccessfulDelete={this.onSuccessfulDelete}/>
-                : <PostListItem post={p} onSuccessfulDelete={this.onSuccessfulDelete}/>
-              )}
+            {
+              posts.length === 0
+              ? user.id === activeUser.id 
+                ? <p>You dont have any posts yet. <Link to='/editor'>Create a new one?</Link></p>
+                : <p>This user does't have any posts yet.</p>
+              : posts.map(p => 
+                user.id === activeUser.id
+                  ? <PostListItem post={p} buttons={true} onSuccessfulDelete={this.onSuccessfulDelete}/>
+                  : <PostListItem post={p} onSuccessfulDelete={this.onSuccessfulDelete}/>
+                )
+            }
           </ul>
         </section>
       </React.Fragment>
