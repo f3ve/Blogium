@@ -28,8 +28,6 @@ class App extends React.Component{
     error: null
   }
 
-
-  
   componentDidMount() {
     IdleService.setIdleCallback(this.logOutFromIdle)
 

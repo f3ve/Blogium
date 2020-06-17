@@ -39,28 +39,34 @@ class PostListItem extends React.Component {
     
     return (
       <li key={post.id} className='post-container'>
-        <Link 
-          to={
-            post.published === false
-            ? `/editor/${post.id}`
-            : `/post/${post.id}`
-          }
-          >
-          <h2 className='postTitle'>
-            {
-              post.title === ''
+        {/* <div className='img-container'> */}
+          <img src={post.user.img} className='postImg'></img>
+        {/* </div> */}
+        <section className='content-container'>
+          <Link 
+            to={
+              post.published === false
+              ? `/editor/${post.id}`
+              : `/post/${post.id}`
+            }
+            >
+            <h2 className='postTitle'>
+              {
+                post.title === ''
                 ? 'Untitled'
                 : post.title
-            }
-          </h2>
-        </Link>
-        <p className='author'>By {post.user.username}</p>
-          <img src={post.img} alt='blog post img' className='postImg' />
-          <p>Posted on: {date}</p>
+              }
+            </h2>
+          </Link>
+              <div className='date-container'>
+                <p className='date-p'>{post.user.username}</p>
+                <p className='date-p'>{date}</p>
+              </div>
+          </section>
           {
             buttons
-              ? this.RenderButtons()
-              : null          
+            ? this.RenderButtons()
+            : null          
           }
       </li>
     )
