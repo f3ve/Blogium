@@ -1,68 +1,111 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Blogium
 
-## Available Scripts
+Blogium is a blogging platform inspired by Medium. It has a simplistic and minimalist style to allow users to focus on reading and writing blog posts. It features a fully functional text editor that I built from scratch using JavaScript that is designed to handle the hassle of formatting allowing the user to focus on their writing. Anyone can read the posts on Blogium and users can easily create an account to get started writing their own posts.
 
-In the project directory, you can run:
+## Tech
 
-### `npm start`
+Blogium was created with React, NodeJS, Express, PostgreSQL, and Firebase it is a Full-Stack web app and you can view the RESTful API Repo [here](https://github.com/f3ve/Blogium-api)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Using the app
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Getting started on Blogium is easy. 
 
-### `npm test`
+simply follow this [link](https://blogium.now.sh/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Main page
 
-### `npm run build`
+![Blogium main page](https://github.com/f3ve/Blogium/src/images/blogium-main-page.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+On the main page you can view posts made by other users. Login or sign up by clicking one of the buttons on the top navigation bar. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Clicking the Blogium Logo from anywhere in the app wil redirect you back to this main page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Post Page
 
-### `npm run eject`
+![Post page content](https://github.com/f3ve/Blogium/src/images/post-page.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Post page comments](https://github.com/f3ve/Blogium/src/images/post-page-comments.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You get to this page by clickin on a post from the main page or a users page.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+On this page you can read a post made by another user. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Clicking on the Author's image will direct you to that users page so you can view other posts written by them and read their bio.
 
-## Learn More
+Below the Author info is the comment section. Users that are logged in to an account can leave comments in the provided input. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+All users can delete a comment that they wrote or any comments on a post that they created. You cannot delete comments made by others if they are not on a post that you created.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### User page
 
-### Code Splitting
+![User page](https://github.com/f3ve/Blogium/src/images/user-page.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+you can get to a users page by click on their image in a post or comment or you can get to your page by clicking 'View your page' in the nav bar.
 
-### Analyzing the Bundle Size
+On a users page you can view all the posts made by that user.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+if you are on your own page you can edit or delete posts that you have made.
 
-### Making a Progressive Web App
+### Drafts
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![Draft-page](https://github.com/f3ve/Blogium/src/images/user-page.png)
 
-### Advanced Configuration
+You can view your drafts by clicking 'View your drafts' in the nav bar
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+The draft page allows you to view posts that you have not yet published
 
-### Deployment
+You can pick up where you left off or delete drafts that you no longer need.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### Editing You Account
 
-### `npm run build` fails to minify
+![Account page](https://github.com/f3ve/Blogium/src/images/user-page.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+You can edit your account by clicking on 'Edit your account' in the nav bar
+
+on this page you can upload a new profile image, change your name, update you email and update your bio. 
+
+You can also delete your account from this page.
+
+## Using the Editor 
+
+![Editor](https://github.com/f3ve/Blogium/src/images/editor.png)
+
+To get to the editor either click 'Create new post' in the nav bar or click edit on an existing post from you drafts or on your page. 
+
+### AutoSave
+
+When you start typing in the body of the editor it will automatically save your progress a few seconds after it has detected you have stopped typing you will see 'Saved' displayed underneath the body of your post.
+
+All AutoSaves are saved as drafts until you manually click publish. If you are editing a post that has already been published the outsave will remove it from published and save it as a draft until you click publish again. 
+
+### the toolbar
+
+The toolbar is displayed at the top of the editor above the title input.
+
+It has some basic editing tools, bold, italic, list, link, heading, and code block. 
+
+in order to use bold or italic highlight the text you want to emphasize and click one or both to apply that style.
+
+You can do the same with list or you can simple select anywhere on the text editor and click it to start a list. 
+
+to insert a link, click the link icon to display the url input, type in the url you want to link, highlight the text you want to convert to a link and click create link.
+
+To create a header highlight the text you want to turn into a header and click the header icon.
+
+To create a code block you can select anywhere on the editor and click the code icon and it will create a code block where you can display bites of code. Code blocks cannot be inserted into the Title input or as the first line of the body. Code blocks must be placed on an empty line you cannot convert highlighted text into a code block.
+
+Save Draft will save the post as a draft. 
+
+Publish will display the post publicly for other users to read.
+
+### Drafts
+
+You can manually save your drafts by clicking 'save draft' on the editor toolbar, which will save your draft and redirect you to your draft page 
+
+Drafts do not have to have a body or a title to be saved. Any drafts saved without a title will be displayed as untitled in your drafts page. 
+
+### publish
+
+You can publish you post by clicking publish in the editor toolbar. This will make your post public and redirect you to your page to view your published posts. 
+
+In order to publish a post you must have a title that it as least 4 characters long. The body of your post must have a minimum length of 400 (including spaces) to be published.
