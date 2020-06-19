@@ -138,7 +138,6 @@ class Register extends React.Component {
     if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
       return 'Password must contain 1 upper case, lower case, number, and special character'
     }
-    // return null
   }
 
   validateMatchPassword() {
@@ -153,7 +152,6 @@ class Register extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.context.clearError()
-    // const { full_name, username, email, password, matchPassword} = e.target
 
     AuthApiService.postUser({
       username: this.state.username.value,
@@ -163,9 +161,6 @@ class Register extends React.Component {
       matchPassword: this.state.matchPassword.value
     })
       .then(u => {
-        // full_name.value = ''
-        // email.value = ''
-        // matchPassword.value = ''
         this.handleSuccess()
       })
       .catch(res => this.context.setError(res.error))
@@ -241,7 +236,7 @@ class Register extends React.Component {
             )
           }
 
-          <label htmlFor='match'>Re-enter Password:</label>
+          <label htmlFor='matchPassword'>Re-enter Password:</label>
           <input
             type='password'
             id='matchPassword'

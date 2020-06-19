@@ -29,7 +29,7 @@ header {
 .clickMe {
   display: inline-block;
   color: white;
-  background-color: #48B;
+  background-color: #258;
   border: none;
   padding: 8px;
   border-radius: 8px;
@@ -40,7 +40,7 @@ header {
 }
 
 .clickMe:hover {
-  color: #48B;
+  color: #258;
   background-color: white;
 }
 
@@ -49,17 +49,13 @@ header {
   margin: 5px;
 }
 
-  .blogium {
+.blogium {
+  text-decoration: none;
   font-family: 'Abril Fatface';
   font-size: 40px; 
   color: white;
   display: none;
   padding: 0 5px ;
-  transition: transform 200ms;
-}
-
-.blogium:hover {
-  transform: scale(1.1);
 }
 
 .hiddenMenu {

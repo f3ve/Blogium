@@ -42,7 +42,7 @@ class Nav extends React.Component {
     return (
       <React.Fragment >
         <img className='user-icon' src={user.img} alt={`${user.username}'s icon`} onClick={e => this.toggleMenu(e)}></img>
-        <nav className='navBar'>
+        <nav className='navBar' aria-label='Hidden drop down menu for mobile'>
           <Link className='clickMe' to={'/editor'}>Create a new post</Link>
           <Link className='clickMe' to={'/drafts'}>View your drafts</Link>
           <Link className='clickMe' to={`/user/${user.id}`}>View your page</Link>

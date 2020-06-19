@@ -13,9 +13,9 @@
 }
 
 .delete {
-  background-color: red;
+  background-color: rgb(160, 0, 0);
 }
 
 .delete:hover {
-  color: red
+  color: rgb(160, 0, 0)
 }
