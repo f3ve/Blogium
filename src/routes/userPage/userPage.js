@@ -65,8 +65,8 @@ export default class UserPage extends React.Component {
             {
               posts.length === 0
               ? user.id === activeUser.id 
-                ? <p>You dont have any posts yet. <Link to='/editor'>Create a new one?</Link></p>
-                : <p>This user does't have any posts yet.</p>
+                ? <p className='noDrafts'>You don't have any posts yet. <Link className='clickMe' to='/editor'>Create a new one?</Link></p>
+                : <p className='noDrafts'>This user doesn't have any posts yet.</p>
               : posts.map(p => 
                 user.id === activeUser.id
                   ? <PostListItem post={p} buttons={true} onSuccessfulDelete={this.onSuccessfulDelete}/>

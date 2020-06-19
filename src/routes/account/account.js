@@ -241,7 +241,7 @@ export default class Account extends React.Component {
           </button>
 
           <label htmlFor='bio'>Bio</label>
-          <textarea id={'bio'} defaultValue={user.bio} onChange={e => this.updateBio(e)}></textarea>
+          <textarea id={'bio'} defaultValue={user.bio} onChange={e => this.updateBio(e)} rows='5' cols='33'></textarea>
           <button 
             className='clickMe'
             onClick={e => this.handleUpdateBio(e)}

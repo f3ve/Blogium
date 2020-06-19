@@ -28,27 +28,31 @@ class Drafts extends React.Component {
 
   renderDrafts() {
     return (
-      <ul className='post-list'>
-        {
-          this.context.error !== null
+      <React.Fragment>
+        {/* <h2 className='yourDrafts'>Your Drafts</h2> */}
+        <ul className='post-list'>
+          {
+            this.context.error !== null
             ? <p className='error'>{this.context.error}</p>
             : null
-        }
-        {
-          this.state.drafts.map(p => {
-            return <PostListItem post={p} key={p.id} buttons={true} onSuccessfulDelete={this.onSuccessfulDelete}/>
-          })
-        }
-      </ul>
+          }
+          {
+            this.state.drafts.map(p => {
+              return <PostListItem post={p} key={p.id} buttons={true} onSuccessfulDelete={this.onSuccessfulDelete}/>
+            })
+          }
+        </ul>
+      </React.Fragment>
     )
   }
 
   render() {
     return (
       <React.Fragment>
+        <h2 className='yourDrafts'>Your Drafts</h2>
         {
           this.state.drafts.length === 0
-            ? <p>No drafts. <Link to='/editor'>Create a new post.</Link></p>
+            ? <p className='noDrafts'>No drafts. <Link className='clickMe' to='/editor'>Create a new post.</Link></p>
             : this.renderDrafts()
         }
       </React.Fragment>

@@ -19,3 +19,7 @@
 .delete:hover {
   color: rgb(160, 0, 0)
 }
+
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}
