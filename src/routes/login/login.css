@@ -1,12 +1,24 @@
 #login-container {
-  border: 2px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 15px lightgray;
+  border-radius: 15px;
 }
 
 #login-form {
   display: flex;
   flex-direction: column;
+}
+
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
 }

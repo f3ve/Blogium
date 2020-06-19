@@ -57,8 +57,8 @@ export default class UserPage extends React.Component {
     return (
       <React.Fragment >
         <section className='profile-header'>
+          <h2>{user.username}</h2>
           <img src={user.img} alt='User profile icon' className='profile-picture'></img>
-          <p>{user.username}</p>
           <p>{user.bio}</p>
         </section>
         <section className='user-posts'>

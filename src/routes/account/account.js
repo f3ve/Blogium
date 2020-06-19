@@ -200,11 +200,10 @@ export default class Account extends React.Component {
     const user = this.context.activeUser
     return (
       <React.Fragment>
-        <h2>{this.context.activeUser.username}</h2>
         <form className='account-form' onSubmit={e => this.handleSubmit(e)}>
           <label htmlFor='img'><img src={this.state.url ? this.state.url : user.img} alt={`${user.username}'s icon`} className='userImg'/></label>
           <input type='file' id='img' onChange={e => this.fileSelectedHandler(e)} />
-          <button onClick={e => this.upLoadImg(e, user.id)}>Upload</button>
+          <button className='clickMe' onClick={e => this.upLoadImg(e, user.id)}>Upload</button>
 
           <label htmlFor='full_name'>Name</label>
           <input type='text' id='full_name' defaultValue={user.full_name} onChange={e => this.updateName(e)}/>
@@ -214,6 +213,7 @@ export default class Account extends React.Component {
             )
           }
           <button 
+            className='clickMe'
             onClick={e => this.handleUpdateName(e)}
             disabled={
               this.validateName() || 
@@ -231,6 +231,7 @@ export default class Account extends React.Component {
             )
           }
           <button 
+            className='clickMe'
             onClick={e => this.handleUpdateEmail(e)}
             disabled={
               this.validateEmail() ||
@@ -243,6 +244,7 @@ export default class Account extends React.Component {
           <label htmlFor='bio'>Bio</label>
           <textarea id={'bio'} defaultValue={user.bio} onChange={e => this.updateBio(e)}></textarea>
           <button 
+            className='clickMe'
             onClick={e => this.handleUpdateBio(e)}
             disabled={
               this.state.bio.changed === false
@@ -251,7 +253,7 @@ export default class Account extends React.Component {
             update bio
           </button>
 
-          <button className='delete' onClick={e=> this.handleDelete(e, user.id)}>delete account</button>
+          <button className='clickMe delete' onClick={e=> this.handleDelete(e, user.id)}>delete account</button>
         </form>
       </React.Fragment>
     )

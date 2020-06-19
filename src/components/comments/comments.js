@@ -6,10 +6,7 @@ import PostsApiService from '../../services/posts-api-services'
 import './comments.css'
 
 function Comments(props) {
-  const activeUserId= TokenService.readJwToken().id
-  const {authorId} = props
-  const {onDelete} = props
-  const {onFail} = props
+  const {activeUserId, authorId, onDelete, onFail} = props
 
   function handleDelete(e, cId) {
     e.preventDefault()
@@ -23,7 +20,7 @@ function Comments(props) {
   }
 
   function renderDeleteButton(cId) {
-    return <button onClick={e => handleDelete(e, cId)}>Delete</button>
+    return <button className='clickMe' onClick={e => handleDelete(e, cId)}>Delete</button>
   }
   
   return (
@@ -37,15 +34,19 @@ function Comments(props) {
                 <Link to={`/user/${c.user.id}`}>
                   <img src={c.user.img} alt={`${c.user.username}'s profile icon`} className='user-img'/>
                 </Link>
-                <p>{c.user.username}</p>
+                <p className='username'>{c.user.username}</p>
               </div>
-              <p>{c.content}</p>
-              <p>{date}</p>
-              {
-                activeUserId === c.user.id || activeUserId === authorId
-                  ? renderDeleteButton(c.id)
-                  : null
-              }
+              <div className='comment-content'>
+                <p className='p-content' >{c.content}</p>
+                <div className='comment-button-container'> 
+                  <p>{date}</p>
+                  {
+                    activeUserId === c.user.id || activeUserId === authorId
+                    ? renderDeleteButton(c.id)
+                    : null
+                  }
+                </div>
+              </div>
             </li>
           )
         })

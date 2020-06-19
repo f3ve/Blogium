@@ -88,7 +88,6 @@ class PostPage extends React.Component {
           </section>
         </section>
         <section className='comment-section'>
-          <h3>Comments</h3>
           <CommentForm postId={post.id} handleComment={this.handleComment}/>
           {
             this.context.error !== null
@@ -103,6 +102,7 @@ class PostPage extends React.Component {
                   authorId={post.user.id}
                   onDelete={this.onDeleteComment}
                   onFail={this.onFail}
+                  activeUserId={this.context.activeUser.id}
                 />
           }
           

@@ -64,8 +64,8 @@ static contextType = Context
             required
           />
           <div className='button-container'>
-            <button type='submit'>Login</button>
-            <button onClick={e => this.clickCancel(e)}>Cancel</button>
+            <button className='clickMe' type='submit'>Login</button>
+            <button className='clickMe' onClick={e => this.clickCancel(e)}>Cancel</button>
           </div>
           {
             this.context.error !== null 

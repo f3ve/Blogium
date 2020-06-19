@@ -39,7 +39,8 @@ a {
   border-radius: 8px;
   margin: 8px;
   font-size: 18px;
-  transition: color 200ms, background-color 200ms;
+  transition: color 200ms, background-color 200ms, opacity 200ms;
+  width: fit-content;
 }
 
 .clickMe:hover {
@@ -52,12 +53,17 @@ a {
   margin: 5px;
 }
 
-h1 {
+  .blogium {
   font-family: 'Abril Fatface';
   font-size: 40px; 
   color: white;
   display: none;
   padding: 0 5px ;
+  transition: transform 200ms;
+}
+
+.blogium:hover {
+  transform: scale(1.1);
 }
 
 .hiddenMenu {
@@ -93,7 +99,7 @@ h1 {
 }
 
 @media only screen and (min-width: 600px) {
-  h1 {
+  .blogium {
     display: initial;
   }
 

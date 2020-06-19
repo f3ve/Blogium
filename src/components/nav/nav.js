@@ -59,7 +59,7 @@ class Nav extends React.Component {
       <React.Fragment>
         <header>
           <Link to='/'>
-            <h1>Blogium</h1>
+            <h1 className='blogium'>Blogium</h1>
             <img src={icon} className='logo'></img>
           </Link>
           {

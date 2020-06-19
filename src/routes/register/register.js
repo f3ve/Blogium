@@ -259,6 +259,7 @@ class Register extends React.Component {
 
           <div className='button-container'>
             <button 
+              className='clickMe'
               type='submit'
               disabled={
                 this.validateName() || 
@@ -270,7 +271,7 @@ class Register extends React.Component {
             >
               Create Account
             </button>
-            <button onClick={e => this.clickCancel(e)}>Cancel</button>
+            <button className='clickMe' onClick={e => this.clickCancel(e)}>Cancel</button>
             {
               this.context.error !== null
               ? <p className='error'>{this.context.error}</p>

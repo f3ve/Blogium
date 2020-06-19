@@ -1,9 +1,13 @@
 #registration-container {
-  border: 2px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 15px lightgray;
+  border-radius: 15px;
 }
 
 #registration-form {
@@ -13,4 +17,14 @@
 
 .error {
   color: red;
+}
+
+.clickMe:disabled {
+  opacity: 50%;
+}
+
+.clickMe:disabled:hover {
+  cursor: default;
+  background-color: #48B;
+  color: white
 }

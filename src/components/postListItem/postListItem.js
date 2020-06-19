@@ -27,9 +27,9 @@ class PostListItem extends React.Component {
  
   RenderButtons() {
    return (
-      <div>
-        <button onClick={e => this.handleEdit(e)}>Edit</button>
-        <button onClick={e => this.handleDelete(e)}>Delete</button>
+      <div className='clickMe-container'>
+        <button className='clickMe' onClick={e => this.handleEdit(e)}>Edit</button>
+        <button className='clickMe' onClick={e => this.handleDelete(e)}>Delete</button>
       </div>
     )
   }

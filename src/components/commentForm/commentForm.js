@@ -31,12 +31,12 @@ class CommentForm extends React.Component {
 
   renderLoginLinks() {
     return (
-      <p>
-        <Link to={'/login'}>Log in </Link>
+      <div className='comment-message'>
+        <Link className='clickMe' to={'/login'}>Log in</Link>
         or
-        <Link to={'/register'}> Create an account</Link>
+        <Link className='clickMe' to={'/register'}> Create an account</Link>
         to leave a comment
-      </p>
+      </div>
     )
   }
 
@@ -46,6 +46,7 @@ class CommentForm extends React.Component {
         id='comment-form'
         onSubmit={this.handleSubmit}
       >
+        <label htmlFor='comment-input'>Leave a comment</label>
         <textarea 
           required
           placeholder='Leave a comment...'
@@ -54,7 +55,7 @@ class CommentForm extends React.Component {
           rows = '4'
           cols='29'
         />
-        <button className='comment-button' type='submit'>Comment</button>
+        <button className='clickMe' type='submit'>Comment</button>
       </form>
     )
   }
