@@ -23,7 +23,7 @@ export default class Editor extends React.Component {
       PostsApiService.getPost(this.props.match.params.id)
         .then(res => {
           this.setState({
-            post: res
+            post: res,
           })
         })
         .then(() => {
@@ -35,6 +35,10 @@ export default class Editor extends React.Component {
     } else {
       this.setState({})
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeoutId)
   }
   
   handleSuccess(publish) {
@@ -120,14 +124,37 @@ export default class Editor extends React.Component {
   handleAutoSave() {
     const content = document.getElementById('sampleeditor').innerHTML
     const title = document.getElementById('title').textContent
+
+    const post = {
+      title,
+      content,
+      published: false
+    }
+
+    !this.props.match.params.id
+      ? PostsApiService.postPost(post)
+        .then(res =>
+          !res.ok
+            ? res.json().then(e => Promise.reject(e))
+            : res.json().then(res => {
+                this.props.history.push(`/editor/${res.id}`)
+                this.setState({autosave: 'Saved'})
+              })
+        )
+        .catch(err => this.context.setError(err.error))
+      : PostsApiService.patchPost(post, this.props.match.params.id)
+        .then(res =>
+          !res.ok
+            ? res.json().then(e => Promise.reject(e))
+            : this.setState({autosave: 'Saved'})
+        )
+        .catch(err => this.context.setError(err.error))
   }
 
   setAutoSaveTimeout(e) {
+    this.setState({autosave: null})
     clearTimeout(this.timeoutId)
-
-    // this.timeoutId = 'worked'
-    // console.log(this.timeoutId)
-    this.timeoutId = setTimeout(() => {console.log('yay')}, 10000)
+    this.timeoutId = setTimeout(() => {this.handleAutoSave()}, 2000)
   }
 
   maxLength(e) {
@@ -147,7 +174,7 @@ export default class Editor extends React.Component {
         />
         {
           this.context.error !== null
-            ? <p className='error'>{this.context.error}</p>
+            ? <div className='error-container'><p className='error'>{this.context.error}</p></div>
             : null
         }
         <div id='title' contentEditable='true' spellCheck='true' placeholder='Title...' data-placeholder='Title...' className='title' onKeyDown={e => this.maxLength(e)}>
@@ -162,9 +189,14 @@ export default class Editor extends React.Component {
             this.state.post
               ? this.state.post.content
               : null
-          }
+            }
         </div>
-        <div id='test'></div> 
+
+        {
+          this.state.autosave
+            ? <div className='autosave'><p>{this.state.autosave}</p></div>
+            : null
+        }
       </React.Fragment>
     )
   }

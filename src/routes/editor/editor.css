@@ -8,6 +8,20 @@
   font-size: 20px;
 }
 
+.autosave { 
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: gray;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .editor > li {
   list-style: square;
   margin: initial
@@ -18,7 +32,6 @@
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 135px;
   font-size: 40px;
 }
 

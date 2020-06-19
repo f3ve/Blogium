@@ -38,7 +38,8 @@ a {
   padding: 8px;
   border-radius: 8px;
   margin: 8px;
-  font-size: 18px
+  font-size: 18px;
+  transition: color 200ms, background-color 200ms;
 }
 
 .clickMe:hover {
