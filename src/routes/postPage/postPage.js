@@ -27,7 +27,7 @@ class PostPage extends React.Component {
       .then(res => this.setState({
         post: res
       }))
-      .catch(err => alert(err))
+      .catch(err => this.props.history.push('/notfound'))
 
     PostsApiService.getComments(id)
       .then(res => this.setState({

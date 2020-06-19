@@ -17,6 +17,7 @@ import AuthApiService from '../services/auth-api-service'
 import PostsApiService from '../services/posts-api-services'
 import Account from '../routes/account/account'
 import Drafts from '../routes/drafts/drafts'
+import NotFound from '../notFound'
 
 
 class App extends React.Component{
@@ -151,6 +152,9 @@ class App extends React.Component{
                 <PrivateRoute 
                   path={'/user/:id/account'}
                   component={Account}
+                />
+                <Route
+                  component={NotFound}
                 />
               </Switch>
             </main>
