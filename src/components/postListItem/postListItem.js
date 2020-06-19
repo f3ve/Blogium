@@ -47,7 +47,7 @@ class PostListItem extends React.Component {
             : `/post/${post.id}`
           }
         >
-          <img src={post.user.img} className='postImg'></img>
+          <img src={post.user.img} alt={`${post.user.username}'s profile icon`} className='postImg'></img>
           <section className='content-container'>
               <h2 className='postTitle'>
                 {

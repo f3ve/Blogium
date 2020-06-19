@@ -47,7 +47,7 @@ class Nav extends React.Component {
           <Link className='clickMe' to={'/drafts'}>View your drafts</Link>
           <Link className='clickMe' to={`/user/${user.id}`}>View your page</Link>
           <Link className='clickMe' to={`/user/${user.id}/account`}>Edit your Account</Link>
-          <Link className='clickMe' onClick={e => this.handleLogoutClick()}>Logout</Link>
+          <button className='clickMe' onClick={e => this.handleLogoutClick()}>Logout</button>
         </nav>
     </React.Fragment>
     )
@@ -60,7 +60,7 @@ class Nav extends React.Component {
         <header>
           <Link to='/'>
             <h1 className='blogium'>Blogium</h1>
-            <img src={icon} className='logo'></img>
+            <img src={icon} className='logo' alt='Blogium logo'></img>
           </Link>
           {
             TokenService.hasAuthToken()
@@ -74,7 +74,7 @@ class Nav extends React.Component {
             <li><Link className='clickMe' to={'/drafts'}>View your drafts</Link></li>
             <li><Link className='clickMe' to={`/user/${user.id}`}>View your page</Link></li>
             <li><Link className='clickMe' to={`/user/${user.id}/account`}>Edit your Account</Link></li>
-            <li><Link className='clickMe' onClick={e => this.handleLogoutClick()}>Logout</Link></li>
+            <li><button className='clickMe' onClick={e => this.handleLogoutClick()}>Logout</button></li>
           </ul>
         </nav>
       </React.Fragment>

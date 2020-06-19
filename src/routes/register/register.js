@@ -107,7 +107,7 @@ class Register extends React.Component {
   
   validateEmail() {
     const email = this.state.email.value
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)){
       return 'You must enter a valid email'
     }
   }
@@ -124,7 +124,7 @@ class Register extends React.Component {
 
   validatePassword() {
     const password = this.state.password.value
-    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[\S]+/
+    const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[\S]+/
 
     if (password.length < 8) {
       return 'Password must be at least 8 characters'

@@ -17,11 +17,6 @@ header {
   display: none;
 }
 
-a {
-  text-decoration: none;
-  color: black
-}
-
 .user-icon {
   width: 50px;
   height: 50px;
@@ -35,6 +30,7 @@ a {
   display: inline-block;
   color: white;
   background-color: #48B;
+  border: none;
   padding: 8px;
   border-radius: 8px;
   margin: 8px;
@@ -106,7 +102,9 @@ a {
   .logo {
     display: none;
   }
+}
 
+@media only screen and (min-width: 950px) {
   .navBar {
     display: initial;
   }

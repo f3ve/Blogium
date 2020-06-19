@@ -37,7 +37,6 @@ export default class Account extends React.Component {
     const uploadTask = storage.ref(`/images/${img.name}`).put(img)
 
     uploadTask.on('state_changed', (snapshot) => {
-      console.log(snapshot)
     }, (err) => {
       this.context.setError(err)
     }, () => {
@@ -95,7 +94,7 @@ export default class Account extends React.Component {
 
   validateEmail() {
     const email = this.state.email.value
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)){
       return 'You must enter a valid email'
     }
   }

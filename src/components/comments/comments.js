@@ -1,7 +1,6 @@
 import React from 'react'
 import {translateDate} from '../utils/utils'
 import {Link} from 'react-router-dom'
-import TokenService from '../../services/token-service'
 import PostsApiService from '../../services/posts-api-services'
 import './comments.css'
 

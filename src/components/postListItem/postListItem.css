@@ -1,4 +1,6 @@
 .post-container {
+  text-decoration: none;
+  color: black;
   height: 135px;
   display: flex;
   justify-content: space-evenly;

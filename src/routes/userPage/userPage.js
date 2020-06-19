@@ -1,7 +1,6 @@
 import React from 'react'
 import Context from '../../context'
 import PostsApiService from '../../services/posts-api-services'
-import TokenService from '../../services/token-service'
 import './userPage.css'
 import PostListItem from '../../components/postListItem/postListItem'
 import { Link } from 'react-router-dom'

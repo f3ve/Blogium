@@ -12,7 +12,6 @@ export default function EditorToolbar(props) {
     const url = document.getElementById('txtFormatUrl').value;
     const show = document.getElementById('url-input')
     const sText = document.getSelection();
-    // create an even called insert HTML 
     document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank">' + sText + '</a>');
     document.getElementById('txtFormatUrl').value = ''
     show.classList.add('hidden')
@@ -46,7 +45,6 @@ export default function EditorToolbar(props) {
 
     codeBlock.classList.add('codeBlock')
     codeBlock.addEventListener('paste', paste)
-    // co
     codeBlock.setAttribute('id', `${id}`)
     target.focusNode.replaceWith(codeBlock)
     
@@ -80,18 +78,18 @@ export default function EditorToolbar(props) {
   const {handleSubmit} = props
   return (
     <div class="sample-toolbar">
-      <a href="javascript:void(0)" onClick={e => format('bold')}><FontAwesomeIcon icon='bold' className='icon' /></a>
-      <a href="javascript:void(0)" onClick={e => format('italic')}><FontAwesomeIcon icon='italic' className='icon'/></a>
-      <a href="javascript:void(0)" onClick={e => format('insertUnorderedList')}><FontAwesomeIcon icon='list' className='icon'/></a>
-      <a href="javascript:void(0)" onClick={e => addLink()}><FontAwesomeIcon icon='link' className='icon' /></a>
+      <button className='clickMe' onClick={e => format('bold')}><FontAwesomeIcon icon='bold' className='icon' /></button>
+      <button className='clickMe' onClick={e => format('italic')}><FontAwesomeIcon icon='italic' className='icon'/></button>
+      <button className='clickMe' onClick={e => format('insertUnorderedList')}><FontAwesomeIcon icon='list' className='icon'/></button>
+      <button className='clickMe' onClick={e => addLink()}><FontAwesomeIcon icon='link' className='icon' /></button>
       <div id='url-input' className='hidden'>
         <input id="txtFormatUrl" placeholder="url" class="form-control" />
-        <button onClick={e => setUrl(e)}>Create Link</button>
+        <button className='clickMe'onClick={e => setUrl(e)}>Create Link</button>
       </div>
-      <a href="javascript:void(0)" onClick={e => setTitle()}><FontAwesomeIcon icon='heading' className='icon' /></a>
-      <a href="javascript:void(0)" onClick={e => addCodeBlock()}><FontAwesomeIcon icon='code' className='icon' /></a>
-      <a href="javascript:void(0)" onClick={e => handleSubmit()}>Save Draft</a>
-      <a href="javascript:void(0)" onClick={e => handleSubmit(true)}>Publish</a>
+      <button className='clickMe' onClick={e => setTitle()}><FontAwesomeIcon icon='heading' className='icon' /></button>
+      <button className='clickMe' onClick={e => addCodeBlock()}><FontAwesomeIcon icon='code' className='icon' /></button>
+      <button className='clickMe' onClick={e => handleSubmit()}>Save Draft</button>
+      <button className='clickMe' onClick={e => handleSubmit(true)}>Publish</button>
     </div>
   )
 }
