@@ -1,10 +1,10 @@
 # Blogium
 
-Blogium is a blogging platform inspired by Medium. It has a simplistic and minimalist style to allow users to focus on reading and writing blog posts. It features a fully functional text editor that I built from scratch using JavaScript that is designed to handle the hassle of formatting allowing the user to focus on their writing. Anyone can read the posts on Blogium and users can easily create an account to get started writing their own posts.
+Blogium is a blogging platform inspired by Medium. It has a simplistic and minimalist style to allow users to focus on reading and writing blog posts. It features a fully functional text editor that I built from scratch using JavaScript. The editor is designed to be simple and easy to use allowing the user to focus on their writing. Anyone can read posts on Blogium and users can easily create an account to get started writing their own posts.
 
 ## Tech
 
-Blogium was created with React, NodeJS, Express, PostgreSQL, and Firebase it is a Full-Stack web app and you can view the RESTful API Repo [here](https://github.com/f3ve/Blogium-api)
+Blogium was created with React, NodeJS, Express, PostgreSQL, and Firebase. It is a Full-Stack web app and you can view the RESTful API Repo [here](https://github.com/f3ve/Blogium-api)
 
 ## Using the app
 
@@ -14,7 +14,7 @@ simply follow this [link](https://blogium.now.sh/)
 
 ### Main page
 
-![Blogium main page](https://github.com/f3ve/Blogium/src/images/blogium-main-page.png)
+![Blogium main page](https://github.com/f3ve/Blogium/blob/master/src/images/blogium-main-page.png)
 
 On the main page you can view posts made by other users. Login or sign up by clicking one of the buttons on the top navigation bar. 
 
@@ -22,9 +22,9 @@ Clicking the Blogium Logo from anywhere in the app wil redirect you back to this
 
 ### Post Page
 
-![Post page content](https://github.com/f3ve/Blogium/src/images/post-page.png)
+![Post page content](https://github.com/f3ve/Blogium/blob/master/src/images/post-page.png)
 
-![Post page comments](https://github.com/f3ve/Blogium/src/images/post-page-comments.png)
+![Post page comments](https://github.com/f3ve/Blogium/blob/master/src/images/post-page-comments.png)
 
 You get to this page by clickin on a post from the main page or a users page.
 
@@ -38,7 +38,7 @@ All users can delete a comment that they wrote or any comments on a post that th
 
 ### User page
 
-![User page](https://github.com/f3ve/Blogium/src/images/user-page.png)
+![User page](https://github.com/f3ve/Blogium/blob/master/src/images/user-page.png)
 
 you can get to a users page by click on their image in a post or comment or you can get to your page by clicking 'View your page' in the nav bar.
 
@@ -48,7 +48,7 @@ if you are on your own page you can edit or delete posts that you have made.
 
 ### Drafts
 
-![Draft-page](https://github.com/f3ve/Blogium/src/images/user-page.png)
+![Draft-page](https://github.com/f3ve/Blogium/blob/master/src/images/draft-page.png)
 
 You can view your drafts by clicking 'View your drafts' in the nav bar
 
@@ -58,7 +58,7 @@ You can pick up where you left off or delete drafts that you no longer need.
 
 ### Editing You Account
 
-![Account page](https://github.com/f3ve/Blogium/src/images/user-page.png)
+![Account page](https://github.com/f3ve/Blogium/blob/master/src/images/account-page.png)
 
 You can edit your account by clicking on 'Edit your account' in the nav bar
 
@@ -68,7 +68,7 @@ You can also delete your account from this page.
 
 ## Using the Editor 
 
-![Editor](https://github.com/f3ve/Blogium/src/images/editor.png)
+![Editor](https://github.com/f3ve/Blogium/blob/master/src/images/editor.png)
 
 To get to the editor either click 'Create new post' in the nav bar or click edit on an existing post from you drafts or on your page. 
 
