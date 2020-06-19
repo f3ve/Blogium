@@ -4,6 +4,7 @@ import Context from '../../context'
 import TokenService from '../../services/token-service'
 import IdleService from '../../services/idle-services'
 import './nav.css'
+import icon from '../../apple-touch-icon.png'
 
 class Nav extends React.Component {
   static defaultProps = {
@@ -22,9 +23,8 @@ class Nav extends React.Component {
   renderLoginLink() {
     return (
       <nav>
-        <Link to='/register'>Register</Link>
-          <span> / </span>
-        <Link to='/login'>Log In</Link>
+        <Link className='clickMe' to='/register'>Register</Link>
+        <Link className='clickMe' to='/login'>Log In</Link>
       </nav>
       )
   }
@@ -40,9 +40,16 @@ class Nav extends React.Component {
 
   renderUserIcon(user) {
     return (
-      <a href='' onClick={e => this.toggleMenu(e)}>
-        <img className='user-img' src={user.img} alt={`${user.username}'s icon`}></img>
-      </a>
+      <React.Fragment >
+        <img className='user-icon' src={user.img} alt={`${user.username}'s icon`} onClick={e => this.toggleMenu(e)}></img>
+        <nav className='navBar'>
+          <Link className='clickMe' to={'/editor'}>Create a new post</Link>
+          <Link className='clickMe' to={'/drafts'}>View your drafts</Link>
+          <Link className='clickMe' to={`/user/${user.id}`}>View your page</Link>
+          <Link className='clickMe' to={`/user/${user.id}/account`}>Edit your Account</Link>
+          <Link className='clickMe' onClick={e => this.handleLogoutClick()}>Logout</Link>
+        </nav>
+    </React.Fragment>
     )
   }
 
@@ -53,6 +60,7 @@ class Nav extends React.Component {
         <header>
           <Link to='/'>
             <h1>Blogium</h1>
+            <img src={icon} className='logo'></img>
           </Link>
           {
             TokenService.hasAuthToken()
@@ -61,12 +69,12 @@ class Nav extends React.Component {
           }
         </header>
         <nav className='hiddenMenu' onClick={e => this.toggleMenu(e)}>
-          <ul>
-            <li><Link to={'/editor'}>Create a new post</Link></li>
-            <li><Link to={'/drafts'}>View your drafts</Link></li>
-            <li><Link to={`/user/${user.id}`}>View your page</Link></li>
-            <li><Link to={`/user/${user.id}/account`}>Edit your Account</Link></li>
-            <li><Link onClick={e => this.handleLogoutClick()}>Logout</Link></li>
+          <ul className='hiddenList'>
+            <li><Link className='clickMe' to={'/editor'}>Create a new post</Link></li>
+            <li><Link className='clickMe' to={'/drafts'}>View your drafts</Link></li>
+            <li><Link className='clickMe' to={`/user/${user.id}`}>View your page</Link></li>
+            <li><Link className='clickMe' to={`/user/${user.id}/account`}>Edit your Account</Link></li>
+            <li><Link className='clickMe' onClick={e => this.handleLogoutClick()}>Logout</Link></li>
           </ul>
         </nav>
       </React.Fragment>

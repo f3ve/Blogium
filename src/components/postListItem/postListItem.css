@@ -1,13 +1,13 @@
 .post-container {
   height: 135px;
-  max-height: 135px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  box-shadow: 0px 0px 15px lightgray;
+  box-shadow: 0px 0px 10px lightgray;
   border-radius: 10px;
-  margin: 20px 10px;
-  padding: 5px 10px;
+  margin: 20px auto;
+  max-width: 400px;
+  transition: transform 200ms, box-shadow 200ms; 
 }
 
 .content-container {
@@ -17,8 +17,13 @@
   justify-content: space-between;
   flex-grow: 2;
   height: 100%;
-  max-width: 70%;
+  width: 70%;
   flex-grow: 1;
+}
+
+.post-container:hover, .post-container:focus{
+  box-shadow: 5px 5px 15px lightgray;
+  transform: scale(1.1);
 }
 
 .post-container .postTitle {
@@ -32,14 +37,14 @@
 }
 
 .postImg {
-  border-radius: 100px;
-  width: 60px;
-  height: auto;
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
+  width: 32%;
+  height: 100%;
 }
 
 .date-p {
   margin: 0;
-  align-self: flex-end;
 }
 .date-container {
   display: flex;
@@ -49,4 +54,5 @@
 
 .postTitle {
   margin-bottom: 5px;
+  padding: 0 10px
 }

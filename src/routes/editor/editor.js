@@ -15,6 +15,8 @@ export default class Editor extends React.Component {
   }
   state={}
 
+  timeoutId
+
   componentDidMount() {
     this.context.clearError()
     if (this.props.match.params.id) {
@@ -51,6 +53,10 @@ export default class Editor extends React.Component {
     if (title.length < 4) {
       return 'Your title must be at least 4 characters long.'
     }
+
+    if (title.length > 80) {
+      return 'Your title is too long'
+    }
   }
 
   validateContent(content) {
@@ -66,9 +72,7 @@ export default class Editor extends React.Component {
   handleSubmit = (publish) => {
     const content = document.getElementById('sampleeditor').innerHTML
     const title = document.getElementById('title').textContent
-    // const img = document.querySelector('img') || null
 
-    console.log(content.length)
     const titleErr = this.validateTitle(title)
     const contentErr = this.validateContent(content)
 
@@ -88,13 +92,11 @@ export default class Editor extends React.Component {
       ? post = {
           title,
           content,
-          img: 'https://picsum.photos/200',
           published: true
         }
       : post = {
           title,
           content,
-          img: 'https://picsum.photos/200',
           published: false
         }
  
@@ -114,9 +116,30 @@ export default class Editor extends React.Component {
           )
           .catch(err => this.context.setError(err.error))
   }
+
+  handleAutoSave() {
+    const content = document.getElementById('sampleeditor').innerHTML
+    const title = document.getElementById('title').textContent
+  }
+
+  setAutoSaveTimeout(e) {
+    clearTimeout(this.timeoutId)
+
+    // this.timeoutId = 'worked'
+    // console.log(this.timeoutId)
+    this.timeoutId = setTimeout(() => {console.log('yay')}, 10000)
+  }
+
+  maxLength(e) {
+    const max = 100
+    const chars = document.getElementById('title').textContent.length
+    
+    if(chars >= max && e.keyCode !== 8) {
+      e.preventDefault()
+    }
+  }
   
   render() {
-    window.addEventListener('keyup', this.press)
     return (
       <React.Fragment>
         <EditorToolbar 
@@ -127,19 +150,19 @@ export default class Editor extends React.Component {
             ? <p className='error'>{this.context.error}</p>
             : null
         }
-        <div id='title' contentEditable='true' spellCheck='true' placeholder='Title...' data-placeholder='Title...' className='title'>
+        <div id='title' contentEditable='true' spellCheck='true' placeholder='Title...' data-placeholder='Title...' className='title' onKeyDown={e => this.maxLength(e)}>
           {
             this.state.post
               ? this.state.post.title
               : null
           }
         </div>
-        <div className='editor' id='sampleeditor' contentEditable='true' placeholder='Body...' spellCheck='true' data-placeholder='Body...'>
-          {/* {
+        <div className='editor' id='sampleeditor' contentEditable='true' placeholder='Body...' spellCheck='true' data-placeholder='Body...' onKeyUp={e => this.setAutoSaveTimeout(e)}>
+          {
             this.state.post
               ? this.state.post.content
               : null
-          } */}
+          }
         </div>
         <div id='test'></div> 
       </React.Fragment>

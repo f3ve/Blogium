@@ -38,36 +38,32 @@ class PostListItem extends React.Component {
     const date = translateDate(new Date(post.date_created))
     
     return (
-      <li key={post.id} className='post-container'>
-        {/* <div className='img-container'> */}
-          <img src={post.user.img} className='postImg'></img>
-        {/* </div> */}
-        <section className='content-container'>
-          <Link 
-            to={
-              post.published === false
-              ? `/editor/${post.id}`
-              : `/post/${post.id}`
-            }
-            >
-            <h2 className='postTitle'>
-              {
-                post.title === ''
-                ? 'Untitled'
-                : post.title
-              }
-            </h2>
-          </Link>
-              <div className='date-container'>
-                <p className='date-p'>{post.user.username}</p>
-                <p className='date-p'>{date}</p>
-              </div>
-          </section>
-          {
-            buttons
-            ? this.RenderButtons()
-            : null          
+      <li key={post.id} >
+        <Link 
+          className='post-container'
+          to={
+            post.published === false
+            ? `/editor/${post.id}`
+            : `/post/${post.id}`
           }
+        >
+          <img src={post.user.img} className='postImg'></img>
+          <section className='content-container'>
+              <h2 className='postTitle'>
+                {
+                  post.title === ''
+                  ? 'Untitled'
+                  : post.title.length >= 60 ? post.title.slice(0, 60) + '...' : post.title
+                }
+              </h2>
+              <p className='date-p'>{date}</p>
+          </section>
+            {
+              buttons
+              ? this.RenderButtons()
+              : null          
+            }
+        </Link>
       </li>
     )
   }
