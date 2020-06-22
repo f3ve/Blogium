@@ -15,7 +15,6 @@ export default function FloatingMenu(props) {
   }
 
   function hideMenu(e) {
-    e.preventDefault(e);
     const menu = document.querySelector('.hide').classList;
     const icon = document.querySelector('.saveIcon');
     const button = document.querySelector('.xIcon');
@@ -38,7 +37,7 @@ export default function FloatingMenu(props) {
       <button className='clickMe float saveIcon' onClick={(e) => showMenu(e)}>
         <FontAwesomeIcon icon='save' />
       </button>
-      <button className='clickMe float xIcon' onClick={(e) => hideMenu(e)}>
+      <button className='clickMe float xIcon' onClick={() => hideMenu()}>
         <FontAwesomeIcon icon='plus' className='x save' />
       </button>
     </React.Fragment>

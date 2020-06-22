@@ -45,8 +45,7 @@ class Nav extends React.Component {
     menu.add('show');
   }
 
-  hideMenu(e) {
-    e.preventDefault();
+  hideMenu() {
     const menu = document.querySelector('.hiddenMenu').classList;
     const icon = document.querySelector('.user-icon');
     const button = document.querySelector('.toggleButton');
@@ -92,8 +91,8 @@ class Nav extends React.Component {
   render() {
     const user = this.props.user;
 
-    document.onclick = (e) => {
-      this.hideMenu(e);
+    document.onclick = () => {
+      this.hideMenu();
     };
 
     return (
