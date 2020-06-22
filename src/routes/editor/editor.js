@@ -93,6 +93,7 @@ export default class Editor extends React.Component {
 
     let post;
 
+    // if publish is true set published to true else set it false
     publish
       ? (post = {
           title,
@@ -105,8 +106,9 @@ export default class Editor extends React.Component {
           published: false,
         });
 
-    !this.props.match.params.id
+    !this.props.match.params.id // checking for params.id to see if current post is a draft
       ? PostsApiService.postPost(post)
+          //if it is new post it wil POST to database
           .then((res) =>
             !res.ok
               ? res.json().then((e) => Promise.reject(e))
@@ -114,6 +116,7 @@ export default class Editor extends React.Component {
           )
           .catch((err) => this.context.setError(err.error))
       : PostsApiService.patchPost(post, this.props.match.params.id)
+          //if it a draft it will PATCH existing post in database
           .then((res) =>
             !res.ok
               ? res.json().then((e) => Promise.reject(e))
@@ -132,8 +135,9 @@ export default class Editor extends React.Component {
       published: false,
     };
 
-    !this.props.match.params.id
+    !this.props.match.params.id //checking if post is a draft or a new post
       ? PostsApiService.postPost(post)
+        //if new post, POST to DATABASE
           .then((res) =>
             !res.ok
               ? res.json().then((e) => Promise.reject(e))
@@ -144,6 +148,7 @@ export default class Editor extends React.Component {
           )
           .catch((err) => this.context.setError(err.error))
       : PostsApiService.patchPost(post, this.props.match.params.id)
+        // if Draft, PATCH existing post
           .then((res) =>
             !res.ok
               ? res.json().then((e) => Promise.reject(e))

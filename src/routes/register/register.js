@@ -34,6 +34,7 @@ class Register extends React.Component {
   };
 
   handleSuccess = () => {
+    // After user successfully registers this logs them in and redirects them to their account page
     const { history } = this.props;
     const username = this.state.username.value;
     const password = this.state.password.value;
