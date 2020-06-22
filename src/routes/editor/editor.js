@@ -172,7 +172,7 @@ export default class Editor extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <EditorToolbar handleSubmit={this.handleSubmit} />
+        <EditorToolbar />
         {this.context.error !== null ? (
           <div className="error-container">
             <p className="error">{this.context.error}</p>
