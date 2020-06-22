@@ -55,7 +55,7 @@ static contextType = Context
               id='username'
               name='username'
               required
-              />
+            />
 
             <label htmlFor='password'>Password:</label>
             <input 
@@ -63,7 +63,8 @@ static contextType = Context
               id='password'
               name='password'
               required
-              />
+            />
+            
             <div className='button-container'>
               <button className='clickMe' type='submit'>Login</button>
               <button className='clickMe' onClick={e => this.clickCancel(e)}>Cancel</button>
@@ -75,6 +76,7 @@ static contextType = Context
             }
           </form>
         </section>
+
         <section className='login-container'> 
           <h2>Demo Credentials</h2>
           <p>Username: DemoUser</p>

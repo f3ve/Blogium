@@ -84,7 +84,7 @@ export default function EditorToolbar(props) {
       <button aria-label='open link insert bar' className='clickMe' onClick={e => addLink()}><FontAwesomeIcon icon='link' className='icon' /></button>
       <div id='url-input' className='hidden'>
         <input id="txtFormatUrl" placeholder="url" class="form-control" />
-        <button className='clickMe'onClick={e => setUrl(e)}>Create Link</button>
+        <button className='clickMe' onClick={e => setUrl(e)}>Create Link</button>
       </div>
       <button aria-label='Create section header' className='clickMe' onClick={e => setTitle()}><FontAwesomeIcon icon='heading' className='icon' /></button>
       <button aria-label='add code block' className='clickMe' onClick={e => addCodeBlock()}><FontAwesomeIcon icon='code' className='icon' /></button>

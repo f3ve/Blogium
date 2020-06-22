@@ -184,7 +184,7 @@ export default class Editor extends React.Component {
               : null
           }
         </div>
-        <div className='editor' id='sampleeditor' contentEditable='true' placeholder='Body...' spellCheck='true' data-placeholder='Body...' onKeyUp={e => this.setAutoSaveTimeout(e)}>
+        <div className='editor' id='sampleeditor' contentEditable='true' placeholder='Body...' spellCheck='true' data-placeholder='Body...' onKeyUp={e => this.setAutoSaveTimeout(e)} onTar>
           {
             this.state.post
               ? this.state.post.content

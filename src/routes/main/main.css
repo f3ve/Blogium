@@ -1,0 +1,7 @@
+.post-list {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%
+}

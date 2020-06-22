@@ -38,7 +38,7 @@ class PostListItem extends React.Component {
     const date = translateDate(new Date(post.date_created))
     
     return (
-      <li key={post.id} >
+      <li key={post.id}>
         <Link 
           className='post-container'
           to={
