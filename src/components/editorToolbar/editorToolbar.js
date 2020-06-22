@@ -85,7 +85,7 @@ export default function EditorToolbar(props) {
   }
 
   return (
-    <div class='sample-toolbar'>
+    <div className='sample-toolbar'>
       <button
         aria-label='bold'
         className='clickMe'
@@ -115,7 +115,7 @@ export default function EditorToolbar(props) {
         <FontAwesomeIcon icon='link' />
       </button>
       <div id='url-input' className='hidden'>
-        <input id='txtFormatUrl' placeholder='url' class='form-control' />
+        <input id='txtFormatUrl' placeholder='url' className='form-control' />
         <button className='clickMe' onClick={(e) => setUrl(e)}>
           Create Link
         </button>

@@ -202,7 +202,6 @@ export default class Editor extends React.Component {
           spellCheck='true'
           data-placeholder='Body...'
           onKeyUp={(e) => this.setAutoSaveTimeout(e)}
-          onTar
         >
           {this.state.post ? this.state.post.content : null}
         </div>

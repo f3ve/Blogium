@@ -5,6 +5,7 @@ import TokenService from '../../services/token-service';
 import IdleService from '../../services/idle-services';
 import './nav.css';
 import icon from '../../apple-touch-icon.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Nav extends React.Component {
   static defaultProps = {
@@ -33,23 +34,39 @@ class Nav extends React.Component {
     );
   }
 
-  toggleMenu(e) {
+  showMenu(e) {
     e.preventDefault();
-    const menu = document.getElementsByClassName('hiddenMenu')[0];
+    const menu = document.querySelector('.hiddenMenu').classList;
+    const icon = document.querySelector('.user-icon');
+    const button = document.querySelector('.toggleButton');
 
-    menu.classList.contains('show')
-      ? menu.classList.remove('show')
-      : menu.classList.add('show');
+    button.style.display = 'initial';
+    icon.style.display = 'none';
+    menu.add('show');
+  }
+
+  hideMenu(e) {
+    e.preventDefault();
+    const menu = document.querySelector('.hiddenMenu').classList;
+    const icon = document.querySelector('.user-icon');
+    const button = document.querySelector('.toggleButton');
+
+    icon.style.display = 'initial';
+    button.style.display = 'none';
+    menu.remove('show');
   }
 
   renderUserIcon(user) {
     return (
       <React.Fragment>
+        <button className='clickMe toggleButton'>
+          <FontAwesomeIcon icon='plus' className='x' />
+        </button>
         <img
           className='user-icon'
           src={user.img}
           alt={`${user.username}'s icon`}
-          onClick={(e) => this.toggleMenu(e)}
+          onClick={(e) => this.showMenu(e)}
         ></img>
         <nav className='navBar' aria-label='Hidden drop down menu for mobile'>
           <Link className='clickMe' to={'/editor'}>
@@ -74,6 +91,11 @@ class Nav extends React.Component {
 
   render() {
     const user = this.props.user;
+
+    document.onclick = (e) => {
+      this.hideMenu(e);
+    };
+
     return (
       <React.Fragment>
         <header>
@@ -85,7 +107,7 @@ class Nav extends React.Component {
             ? this.renderUserIcon(user)
             : this.renderLoginLink()}
         </header>
-        <nav className='hiddenMenu' onClick={(e) => this.toggleMenu(e)}>
+        <nav className='hiddenMenu'>
           <ul className='hiddenList'>
             <li>
               <Link className='clickMe' to={'/editor'}>
