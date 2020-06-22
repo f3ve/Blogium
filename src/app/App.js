@@ -118,6 +118,7 @@ class App extends React.Component {
       clearError: this.clearError,
       setPosts: this.setPosts,
     };
+
     return (
       <div className='App'>
         <Nav user={this.state.activeUser} />

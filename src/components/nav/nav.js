@@ -17,8 +17,7 @@ class Nav extends React.Component {
     TokenService.clearAuthToken();
     TokenService.clearCallbackBeforeExpirey();
     IdleService.unRegisterIdleResets();
-    this.context.clearActiveUser();
-    this.props.history.push('/main');
+    this.context.clearActiveUser(this.props.history.push('/main'));
   };
 
   renderLoginLink() {
@@ -40,8 +39,8 @@ class Nav extends React.Component {
     const icon = document.querySelector('.user-icon');
     const button = document.querySelector('.toggleButton');
 
-    button.style.display = 'initial';
-    icon.style.display = 'none';
+    button.classList.remove('hidden');
+    icon.classList.add('hidden');
     menu.add('show');
   }
 
@@ -50,15 +49,20 @@ class Nav extends React.Component {
     const icon = document.querySelector('.user-icon');
     const button = document.querySelector('.toggleButton');
 
-    icon.style.display = 'initial';
-    button.style.display = 'none';
+    if (icon) {
+      icon.classList.remove('hidden');
+    }
+
+    if (button) {
+      button.classList.add('hidden');
+    }
     menu.remove('show');
   }
 
   renderUserIcon(user) {
     return (
       <React.Fragment>
-        <button className='clickMe toggleButton'>
+        <button className='clickMe toggleButton hidden'>
           <FontAwesomeIcon icon='plus' className='x' />
         </button>
         <img
@@ -91,11 +95,9 @@ class Nav extends React.Component {
   render() {
     const user = this.props.user;
 
-    if (document.querySelector('user.icon')) {
-      document.onclick = () => {
-        this.hideMenu();
-      };
-    }
+    document.onclick = () => {
+      this.hideMenu();
+    };
 
     return (
       <React.Fragment>
