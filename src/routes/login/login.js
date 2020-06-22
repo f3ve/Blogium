@@ -51,10 +51,10 @@ class Login extends React.Component {
         <section className='login-container'>
           <h2>Login</h2>
           <form id='login-form' onSubmit={(e) => this.handleSubmit(e)}>
-            <label htmlFor='username'>Username:</label>
+            <label htmlFor='username'>Username</label>
             <input type='text' id='username' name='username' required />
 
-            <label htmlFor='password'>Password:</label>
+            <label htmlFor='password'>Password</label>
             <input type='password' id='password' name='password' required />
 
             <div className='button-container'>

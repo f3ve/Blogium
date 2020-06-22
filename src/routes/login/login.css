@@ -27,8 +27,8 @@ input {
   margin: 5px;
 }
 
-#login-form label {
-  align-self: flex-start;
+label {
+  margin-top: 5px;
 }
 
 .button-container {

@@ -177,7 +177,7 @@ class Register extends React.Component {
       <section id='registration-container'>
         <h2>Create Account</h2>
         <form id='registration-form' onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor='full_name'>Full Name:</label>
+          <label htmlFor='full_name'>Full Name</label>
           <input
             type='text'
             id='full_name'
@@ -191,7 +191,7 @@ class Register extends React.Component {
             <ValidationError message={this.validateName()} />
           )}
 
-          <label htmlFor='username'>Username:</label>
+          <label htmlFor='username'>Username</label>
           <input
             type='text'
             id='username'
@@ -205,7 +205,7 @@ class Register extends React.Component {
             <ValidationError message={this.validateUsername()} />
           )}
 
-          <label htmlFor='email'>email:</label>
+          <label htmlFor='email'>email</label>
           <input
             type='email'
             id='email'
@@ -219,7 +219,7 @@ class Register extends React.Component {
             <ValidationError message={this.validateEmail()} />
           )}
 
-          <label htmlFor='password'>Password:</label>
+          <label htmlFor='password'>Password</label>
           <input
             type='password'
             id='password'
@@ -233,7 +233,7 @@ class Register extends React.Component {
             <ValidationError message={this.validatePassword()} />
           )}
 
-          <label htmlFor='matchPassword'>Re-enter Password:</label>
+          <label htmlFor='matchPassword'>Re-enter Password</label>
           <input
             type='password'
             id='matchPassword'

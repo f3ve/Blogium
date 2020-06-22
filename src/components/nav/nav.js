@@ -91,9 +91,11 @@ class Nav extends React.Component {
   render() {
     const user = this.props.user;
 
-    document.onclick = () => {
-      this.hideMenu();
-    };
+    if (document.querySelector('user.icon')) {
+      document.onclick = () => {
+        this.hideMenu();
+      };
+    }
 
     return (
       <React.Fragment>
