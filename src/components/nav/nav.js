@@ -46,7 +46,7 @@ class Nav extends React.Component {
   }
 
   hideMenu(e) {
-    e.preventDefault();
+    // e.preventDefault();
     const menu = document.querySelector('.hiddenMenu').classList;
     const icon = document.querySelector('.user-icon');
     const button = document.querySelector('.toggleButton');

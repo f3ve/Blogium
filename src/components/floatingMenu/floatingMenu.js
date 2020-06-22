@@ -3,14 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './floatingMenu.css';
 
 export default function FloatingMenu(props) {
-  function toggleHiddenMenu(e) {
-    e.preventDefault();
+  function showMenu(e) {
+    e.preventDefault(e);
+    const menu = document.querySelector('.hide').classList;
+    const icon = document.querySelector('.saveIcon');
+    const button = document.querySelector('.xIcon');
 
-    const hidden = document.querySelector('.hide');
+    icon.style.display = 'none';
+    button.style.display = 'initial';
+    menu.add('show');
+  }
 
-    hidden.classList.contains('show')
-      ? hidden.classList.remove('show')
-      : hidden.classList.add('show');
+  function hideMenu(e) {
+    e.preventDefault(e);
+    const menu = document.querySelector('.hide').classList;
+    const icon = document.querySelector('.saveIcon');
+    const button = document.querySelector('.xIcon');
+
+    icon.style.display = 'initial';
+    button.style.display = 'none';
+    menu.remove('show');
   }
 
   return (
@@ -23,8 +35,11 @@ export default function FloatingMenu(props) {
           Publish
         </button>
       </menu>
-      <button className='clickMe float' onClick={(e) => toggleHiddenMenu(e)}>
+      <button className='clickMe float saveIcon' onClick={(e) => showMenu(e)}>
         <FontAwesomeIcon icon='save' />
+      </button>
+      <button className='clickMe float xIcon' onClick={(e) => hideMenu(e)}>
+        <FontAwesomeIcon icon='plus' className='x save' />
       </button>
     </React.Fragment>
   );
