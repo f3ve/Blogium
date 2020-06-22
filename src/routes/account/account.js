@@ -186,7 +186,7 @@ export default class Account extends React.Component {
     TokenService.clearAuthToken();
     TokenService.clearCallbackBeforeExpirey();
     this.context.clearError();
-    this.context.clearActiveUser(() => this.props.history.push("/"));
+    this.context.clearActiveUser(() => this.props.history.push("/main"));
   };
 
   handleDelete = (e, userId) => {

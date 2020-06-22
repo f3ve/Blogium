@@ -11,11 +11,11 @@ class Login extends React.Component {
 
   clickCancel(e) {
     e.preventDefault();
-    this.props.history.push("/");
+    this.props.history.push("/main");
   }
 
   handleSuccess() {
-    const destination = (this.props.location.state || {}).from || "/";
+    const destination = (this.props.location.state || {}).from || "/main";
     const token = TokenService.readJwToken();
     this.context.clearError();
 

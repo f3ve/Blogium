@@ -168,7 +168,7 @@ class Register extends React.Component {
 
   clickCancel(e) {
     e.preventDefault();
-    this.props.history.push("/");
+    this.props.history.push("/main");
   }
 
   render() {

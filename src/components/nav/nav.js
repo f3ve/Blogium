@@ -17,7 +17,7 @@ class Nav extends React.Component {
     TokenService.clearCallbackBeforeExpirey();
     IdleService.unRegisterIdleResets();
     this.context.clearActiveUser();
-    this.props.history.push("/");
+    this.props.history.push("/main");
   };
 
   renderLoginLink() {
@@ -77,7 +77,7 @@ class Nav extends React.Component {
     return (
       <React.Fragment>
         <header>
-          <Link to="/">
+          <Link to="/main">
             <h1 className="blogium">Blogium</h1>
             <img src={icon} className="logo" alt="Blogium logo"></img>
           </Link>

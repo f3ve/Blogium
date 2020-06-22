@@ -18,6 +18,7 @@ import PostsApiService from "../services/posts-api-services";
 import Account from "../routes/account/account";
 import Drafts from "../routes/drafts/drafts";
 import NotFound from "../notFound";
+import Landing from '../routes/landing/landing'
 
 class App extends React.Component {
   state = {
@@ -121,7 +122,8 @@ class App extends React.Component {
         <Context.Provider value={contextValue}>
           <main>
             <Switch>
-              <Route exact path={"/"} component={Main} />
+              <Route exact path={"/"} component={Landing} />
+              <Route path={"/main"} component={Main} />
               <PublicOnlyRoute path={"/register"} component={Register} />
               <PublicOnlyRoute path={"/login"} component={Login} />
               <Route path={"/post/:id"} component={PostPage} />
