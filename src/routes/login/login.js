@@ -45,35 +45,42 @@ static contextType = Context
 
   render() {
     return(
-      <section id='login-container'>
-        <h2>Login</h2>
-        <form id='login-form'onSubmit={e => this.handleSubmit(e)}>
-          <label htmlFor='username'>Username:</label>
-          <input 
-            type='text'
-            id='username'
-            name='username'
-            required
-          />
+      <React.Fragment>
+        <section className='login-container'>
+          <h2>Login</h2>
+          <form id='login-form'onSubmit={e => this.handleSubmit(e)}>
+            <label htmlFor='username'>Username:</label>
+            <input 
+              type='text'
+              id='username'
+              name='username'
+              required
+              />
 
-          <label htmlFor='password'>Password:</label>
-          <input 
-            type='password'
-            id='password'
-            name='password'
-            required
-          />
-          <div className='button-container'>
-            <button className='clickMe' type='submit'>Login</button>
-            <button className='clickMe' onClick={e => this.clickCancel(e)}>Cancel</button>
-          </div>
-          {
-            this.context.error !== null 
+            <label htmlFor='password'>Password:</label>
+            <input 
+              type='password'
+              id='password'
+              name='password'
+              required
+              />
+            <div className='button-container'>
+              <button className='clickMe' type='submit'>Login</button>
+              <button className='clickMe' onClick={e => this.clickCancel(e)}>Cancel</button>
+            </div>
+            {
+              this.context.error !== null 
               ? <p className='error'>{this.context.error}</p>
               :null
-          }
-        </form>
-      </section>
+            }
+          </form>
+        </section>
+        <section className='login-container'> 
+          <h2>Demo Credentials</h2>
+          <p>Username: DemoUser</p>
+          <p>Password: Password1!</p>
+        </section>
+      </React.Fragment>
     )
   }
 }
