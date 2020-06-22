@@ -63,3 +63,11 @@
   margin-bottom: 5px;
   padding: 0 10px;
 }
+
+@media only screen and (min-width: 600px) {
+  .post-container:hover,
+  .post-container:focus {
+    box-shadow: 5px 5px 15px lightgray;
+    transform: scale(1.1);
+  }
+}
