@@ -30,6 +30,8 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+
+    // function to reset auth token before it expires if user is no idle
     IdleService.setIdleCallback(this.logOutFromIdle);
 
     if (TokenService.hasAuthToken()) {
@@ -52,6 +54,7 @@ class App extends React.Component {
   }
 
   logOutFromIdle = () => {
+    // if user is idle clears timeout function so auth token won't refresh
     TokenService.clearAuthToken();
     TokenService.clearCallbackBeforeExpirey();
     IdleService.unRegisterIdleResets();
