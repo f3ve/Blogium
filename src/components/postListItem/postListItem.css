@@ -27,8 +27,7 @@
   flex-grow: 1;
 }
 
-.post-container:hover,
-.post-container:focus {
+.post-container:hover {
   box-shadow: 5px 5px 15px lightgray;
   transform: scale(1.1);
 }
@@ -64,10 +63,10 @@
   padding: 0 10px;
 }
 
-@media only screen and (min-width: 600px) {
+/* @media only screen and (min-width: 600px) {
   .post-container:hover,
   .post-container:focus {
     box-shadow: 5px 5px 15px lightgray;
     transform: scale(1.1);
   }
-}
+} */
