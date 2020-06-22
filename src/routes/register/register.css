@@ -25,6 +25,6 @@
 
 .clickMe:disabled:hover {
   cursor: default;
-  background-color: #48B;
-  color: white
+  background-color: #48b;
+  color: white;
 }

@@ -23,7 +23,7 @@ header {
   object-fit: cover;
   border-radius: 8px;
   margin: 5px;
-  border: 2px solid #48B;
+  border: 2px solid #48b;
 }
 
 .clickMe {
@@ -42,6 +42,7 @@ header {
 .clickMe:hover {
   color: #258;
   background-color: white;
+  cursor: pointer;
 }
 
 .logo {
@@ -51,11 +52,11 @@ header {
 
 .blogium {
   text-decoration: none;
-  font-family: 'Abril Fatface';
-  font-size: 40px; 
+  font-family: "Abril Fatface";
+  font-size: 40px;
   color: white;
   display: none;
-  padding: 0 5px ;
+  padding: 0 5px;
 }
 
 .hiddenMenu {
@@ -67,7 +68,7 @@ header {
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
-  right: 0
+  right: 0;
 }
 
 .hiddenList {
@@ -76,7 +77,6 @@ header {
   justify-content: space-evenly;
   align-items: center;
 }
-
 
 .hiddenMenu li {
   list-style: none;
@@ -87,7 +87,7 @@ header {
 }
 
 .hiddenMenu.show {
-  top: 50px
+  top: 50px;
 }
 
 @media only screen and (min-width: 600px) {

@@ -1,0 +1,18 @@
+.clickMe.float {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  width: 60px;
+  height: 60px;
+}
+
+.hide {
+  position: fixed;
+  bottom: 15px;
+  right: -250px;
+  transition: ease-in-out right 500ms;
+}
+
+.hide.show {
+  right: 100px;
+}

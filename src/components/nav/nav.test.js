@@ -1,17 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {BrowserRouter} from 'react-router-dom'
-import Nav from './nav'
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import Nav from "./nav";
 
-describe('nav component', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div')
+describe("nav component", () => {
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
     ReactDOM.render(
       <BrowserRouter>
         <Nav />
       </BrowserRouter>,
       div
-    )
-    ReactDOM.unmountComponentAtNode(div)
-  })
-})
+    );
+    ReactDOM.unmountComponentAtNode(div);
+  });
+});

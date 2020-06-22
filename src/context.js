@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Context = React.createContext({
   posts: [],
@@ -13,7 +13,7 @@ const Context = React.createContext({
   clearEditPost: () => {},
   setError: () => {},
   clearError: () => {},
-  setPosts: () => {}
-})
+  setPosts: () => {},
+});
 
-export default Context
+export default Context;

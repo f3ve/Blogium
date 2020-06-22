@@ -13,11 +13,6 @@
   overflow: auto;
 }
 
-  .icon {
-  cursor:pointer;
-  margin: 5px;
-}
-
 .sample-toolbar > span:hover
 {
   text-decoration:underline;

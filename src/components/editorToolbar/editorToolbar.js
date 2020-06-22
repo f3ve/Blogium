@@ -75,21 +75,18 @@ export default function EditorToolbar(props) {
     document.execCommand('insertHTML', false, text)
   }
   
-  const {handleSubmit} = props
   return (
     <div class="sample-toolbar">
-      <button aria-label='bold' className='clickMe' onClick={e => format('bold')}><FontAwesomeIcon icon='bold' className='icon' /></button>
-      <button aria-label='italic' className='clickMe' onClick={e => format('italic')}><FontAwesomeIcon icon='italic' className='icon'/></button>
-      <button aria-label='insert unordered list' className='clickMe' onClick={e => format('insertUnorderedList')}><FontAwesomeIcon icon='list' className='icon'/></button>
-      <button aria-label='open link insert bar' className='clickMe' onClick={e => addLink()}><FontAwesomeIcon icon='link' className='icon' /></button>
+      <button aria-label='bold' className='clickMe' onClick={e => format('bold')}><FontAwesomeIcon icon='bold' /></button>
+      <button aria-label='italic' className='clickMe' onClick={e => format('italic')}><FontAwesomeIcon icon='italic' /></button>
+      <button aria-label='insert unordered list' className='clickMe' onClick={e => format('insertUnorderedList')}><FontAwesomeIcon icon='list'/></button>
+      <button aria-label='open link insert bar' className='clickMe' onClick={e => addLink()}><FontAwesomeIcon icon='link'/></button>
       <div id='url-input' className='hidden'>
         <input id="txtFormatUrl" placeholder="url" class="form-control" />
         <button className='clickMe' onClick={e => setUrl(e)}>Create Link</button>
       </div>
-      <button aria-label='Create section header' className='clickMe' onClick={e => setTitle()}><FontAwesomeIcon icon='heading' className='icon' /></button>
-      <button aria-label='add code block' className='clickMe' onClick={e => addCodeBlock()}><FontAwesomeIcon icon='code' className='icon' /></button>
-      <button className='clickMe' onClick={e => handleSubmit()}>Save Draft</button>
-      <button className='clickMe' onClick={e => handleSubmit(true)}>Publish</button>
+      <button aria-label='Create section header' className='clickMe' onClick={e => setTitle()}><FontAwesomeIcon icon='heading'/></button>
+      <button aria-label='add code block' className='clickMe' onClick={e => addCodeBlock()}><FontAwesomeIcon icon='code'/></button>
     </div>
   )
 }

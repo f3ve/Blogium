@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px
+  padding: 10px;
 }
 
 .profile-picture {
@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20%
+  width: 20%;
 }
 
 .clickMe-container .clickMe {

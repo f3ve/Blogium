@@ -1,90 +1,84 @@
-import React from 'react'
-import AuthApiService from '../../services/auth-api-service'
-import Context from '../../context'
-import TokenService from '../../services/token-service'
-import PostsApiService from '../../services/posts-api-services'
-import {withRouter} from 'react-router-dom'
-import './login.css'
+import React from "react";
+import AuthApiService from "../../services/auth-api-service";
+import Context from "../../context";
+import TokenService from "../../services/token-service";
+import PostsApiService from "../../services/posts-api-services";
+import { withRouter } from "react-router-dom";
+import "./login.css";
 
 class Login extends React.Component {
-static contextType = Context
-  
+  static contextType = Context;
+
   clickCancel(e) {
-    e.preventDefault()
-    this.props.history.push('/')
+    e.preventDefault();
+    this.props.history.push("/");
   }
 
   handleSuccess() {
-    const destination = (this.props.location.state || {}).from || '/'
-    const token = TokenService.readJwToken()
-    this.context.clearError()
+    const destination = (this.props.location.state || {}).from || "/";
+    const token = TokenService.readJwToken();
+    this.context.clearError();
 
     PostsApiService.getUser(token.id)
-      .then(u => {
-        this.context.setActiveUser(u, () => this.props.history.push(destination))
+      .then((u) => {
+        this.context.setActiveUser(u, () =>
+          this.props.history.push(destination)
+        );
       })
-      .catch(err => this.context.setError(err.error))
+      .catch((err) => this.context.setError(err.error));
   }
 
   handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    const {username, password} = e.target
+    const { username, password } = e.target;
 
     AuthApiService.postLogin({
       username: username.value,
-      password: password.value
+      password: password.value,
     })
       .then(() => {
-        username.value = ''
-        password.value = ''
-        this.handleSuccess()
+        username.value = "";
+        password.value = "";
+        this.handleSuccess();
       })
-      .catch(res => this.context.setError(res.error))
+      .catch((res) => this.context.setError(res.error));
   }
 
   render() {
-    return(
+    return (
       <React.Fragment>
-        <section className='login-container'>
+        <section className="login-container">
           <h2>Login</h2>
-          <form id='login-form'onSubmit={e => this.handleSubmit(e)}>
-            <label htmlFor='username'>Username:</label>
-            <input 
-              type='text'
-              id='username'
-              name='username'
-              required
-            />
+          <form id="login-form" onSubmit={(e) => this.handleSubmit(e)}>
+            <label htmlFor="username">Username:</label>
+            <input type="text" id="username" name="username" required />
 
-            <label htmlFor='password'>Password:</label>
-            <input 
-              type='password'
-              id='password'
-              name='password'
-              required
-            />
-            
-            <div className='button-container'>
-              <button className='clickMe' type='submit'>Login</button>
-              <button className='clickMe' onClick={e => this.clickCancel(e)}>Cancel</button>
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+
+            <div className="button-container">
+              <button className="clickMe" type="submit">
+                Login
+              </button>
+              <button className="clickMe" onClick={(e) => this.clickCancel(e)}>
+                Cancel
+              </button>
             </div>
-            {
-              this.context.error !== null 
-              ? <p className='error'>{this.context.error}</p>
-              :null
-            }
+            {this.context.error !== null ? (
+              <p className="error">{this.context.error}</p>
+            ) : null}
           </form>
         </section>
 
-        <section className='login-container'> 
+        <section className="login-container">
           <h2>Demo Credentials</h2>
           <p>Username: DemoUser</p>
           <p>Password: Password1!</p>
         </section>
       </React.Fragment>
-    )
+    );
   }
 }
- 
-export default withRouter(Login)
+
+export default withRouter(Login);

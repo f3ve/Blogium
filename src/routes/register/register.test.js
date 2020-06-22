@@ -1,17 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {BrowserRouter} from 'react-router-dom'
-import Register from './register'
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import Register from "./register";
 
-describe('Registeration Route', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div')
+describe("Registration Route", () => {
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
     ReactDOM.render(
-      <BrowserRouter>\
+      <BrowserRouter>
+        \
         <Register />
       </BrowserRouter>,
       div
-    )
-    ReactDOM.unmountComponentAtNode(div)
-  })
-})
+    );
+    ReactDOM.unmountComponentAtNode(div);
+  });
+});

@@ -8,7 +8,7 @@
   font-size: 20px;
 }
 
-.autosave { 
+.autosave {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
 
 .editor > li {
   list-style: square;
-  margin: initial
+  margin: initial;
 }
 
 #title {
@@ -37,24 +37,26 @@
   margin-bottom: 50px;
 }
 
-.editor:focus, #title:focus {
+.editor:focus,
+#title:focus {
   outline: none;
 }
 
-#title:empty:before, .editor:empty:before {
-  content:  attr(data-placeholder);
+#title:empty:before,
+.editor:empty:before {
+  content: attr(data-placeholder);
   color: gray;
 }
 
 pre {
-  background-color:rgb(21, 34, 75);
+  background-color: rgb(21, 34, 75);
   margin-left: auto;
   margin-right: auto;
   margin-top: 0;
   margin-bottom: 0;
   height: auto;
   min-height: 39px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   overflow: auto;
   color: white;
   padding: 8px;
