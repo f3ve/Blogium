@@ -1,5 +1,5 @@
-import TokenService from "./token-service";
-import config from "../config";
+import TokenService from './token-service';
+import config from '../config';
 
 const PostsApiService = {
   getPosts() {
@@ -17,7 +17,7 @@ const PostsApiService = {
   getDrafts() {
     return fetch(`${config.API_BASE_URL}/posts/drafts`, {
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
     }).then((res) =>
@@ -47,9 +47,9 @@ const PostsApiService = {
 
   postPost(post) {
     return fetch(`${config.API_BASE_URL}/posts`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(post),
@@ -58,9 +58,9 @@ const PostsApiService = {
 
   postComment(comment) {
     return fetch(`${config.API_BASE_URL}/comments`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(comment),
@@ -69,9 +69,9 @@ const PostsApiService = {
 
   patchPost(post, postId) {
     return fetch(`${config.API_BASE_URL}/posts/${postId}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(post),
@@ -80,9 +80,9 @@ const PostsApiService = {
 
   patchUser(user, userId) {
     return fetch(`${config.API_BASE_URL}/users/${userId}`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify(user),
@@ -93,9 +93,9 @@ const PostsApiService = {
 
   deleteUser(userId) {
     return fetch(`${config.API_BASE_URL}/users/${userId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "content-ty{pe": "application/json",
+        'content-ty{pe': 'application/json',
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
     });
@@ -103,9 +103,9 @@ const PostsApiService = {
 
   deletePost(postId) {
     return fetch(`${config.API_BASE_URL}/posts/${postId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
     });
@@ -113,9 +113,9 @@ const PostsApiService = {
 
   deleteComment(cId) {
     return fetch(`${config.API_BASE_URL}/comments/${cId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
     });

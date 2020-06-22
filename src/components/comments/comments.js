@@ -1,8 +1,8 @@
-import React from "react";
-import { translateDate } from "../utils/utils";
-import { Link } from "react-router-dom";
-import PostsApiService from "../../services/posts-api-services";
-import "./comments.css";
+import React from 'react';
+import { translateDate } from '../utils/utils';
+import { Link } from 'react-router-dom';
+import PostsApiService from '../../services/posts-api-services';
+import './comments.css';
 
 function Comments(props) {
   const { activeUserId, authorId, onDelete, onFail } = props;
@@ -18,31 +18,31 @@ function Comments(props) {
 
   function renderDeleteButton(cId) {
     return (
-      <button className="clickMe" onClick={(e) => handleDelete(e, cId)}>
+      <button className='clickMe' onClick={(e) => handleDelete(e, cId)}>
         Delete
       </button>
     );
   }
 
   return (
-    <ul className="comments-list">
+    <ul className='comments-list'>
       {props.comments.reverse().map((c) => {
         const date = translateDate(new Date(c.date_created));
         return (
-          <li key={c.id} className="comment">
-            <div className="user-container">
+          <li key={c.id} className='comment'>
+            <div className='user-container'>
               <Link to={`/user/${c.user.id}`}>
                 <img
                   src={c.user.img}
                   alt={`${c.user.username}'s profile icon`}
-                  className="user-img"
+                  className='user-img'
                 />
               </Link>
-              <p className="username">{c.user.username}</p>
+              <p className='username'>{c.user.username}</p>
             </div>
-            <div className="comment-content">
-              <p className="p-content">{c.content}</p>
-              <div className="comment-button-container">
+            <div className='comment-content'>
+              <p className='p-content'>{c.content}</p>
+              <div className='comment-button-container'>
                 <p>{date}</p>
                 {activeUserId === c.user.id || activeUserId === authorId
                   ? renderDeleteButton(c.id)

@@ -1,9 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import "./index.css";
-import App from "./app/App";
-import { library } from "@fortawesome/fontawesome-svg-core";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+import App from './app/App';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faBold,
   faItalic,
@@ -13,7 +13,7 @@ import {
   faHeading,
   faCode,
   faSave,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faBold,
@@ -30,5 +30,5 @@ ReactDOM.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

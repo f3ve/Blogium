@@ -1,12 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./landing.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './landing.css';
 
 export default function Landing(props) {
   return (
     <React.Fragment>
-      <h2 id="title">Welcome to Blogium</h2>
-      <div id="content">
+      <h2 id='title'>Welcome to Blogium</h2>
+      <div id='content'>
         <p>
           Blogium is a blog platform inspired by Medium. It features a fully
           functional WYSIWYG text editor and a minimalist design to focus user's
@@ -26,7 +26,7 @@ export default function Landing(props) {
           not want to create an account. Keep in mind the demo account will have
           likely been used by others.
         </p>
-        <Link to="/main" className="clickMe landing">
+        <Link to='/main' className='clickMe landing'>
           Main Page
         </Link>
       </div>

@@ -1,10 +1,10 @@
-import React from "react";
-import TokenService from "../../services/token-service";
-import PostsApiService from "../../services/posts-api-services";
-import Context from "../../context";
-import EditorToolbar from "../../components/editorToolbar/editorToolbar";
-import FloatingMenu from "../../components/floatingMenu/floatingMenu";
-import "./editor.css";
+import React from 'react';
+import TokenService from '../../services/token-service';
+import PostsApiService from '../../services/posts-api-services';
+import Context from '../../context';
+import EditorToolbar from '../../components/editorToolbar/editorToolbar';
+import FloatingMenu from '../../components/floatingMenu/floatingMenu';
+import './editor.css';
 
 export default class Editor extends React.Component {
   static contextType = Context;
@@ -28,7 +28,7 @@ export default class Editor extends React.Component {
           });
         })
         .then(() => {
-          const doc = document.getElementsByClassName("editor");
+          const doc = document.getElementsByClassName('editor');
 
           doc[0].innerHTML = this.state.post.content;
         })
@@ -51,32 +51,32 @@ export default class Editor extends React.Component {
   }
 
   validateTitle(title) {
-    if (title === "") {
-      return "Your post must have a title to be published";
+    if (title === '') {
+      return 'Your post must have a title to be published';
     }
 
     if (title.length < 4) {
-      return "Your title must be at least 4 characters long.";
+      return 'Your title must be at least 4 characters long.';
     }
 
     if (title.length > 80) {
-      return "Your title is too long";
+      return 'Your title is too long';
     }
   }
 
   validateContent(content) {
-    if (content === "") {
-      return "You must have some content in order to publish your post";
+    if (content === '') {
+      return 'You must have some content in order to publish your post';
     }
 
     if (content.length < 400) {
-      return "Your post needs to have at least 400 characters in order to publish it. Add some more content or save it as a draft to come back later.";
+      return 'Your post needs to have at least 400 characters in order to publish it. Add some more content or save it as a draft to come back later.';
     }
   }
 
   handleSubmit = (publish) => {
-    const content = document.getElementById("sampleeditor").innerHTML;
-    const title = document.getElementById("title").textContent;
+    const content = document.getElementById('sampleeditor').innerHTML;
+    const title = document.getElementById('title').textContent;
 
     const titleErr = this.validateTitle(title);
     const contentErr = this.validateContent(content);
@@ -126,8 +126,8 @@ export default class Editor extends React.Component {
   };
 
   handleAutoSave() {
-    const content = document.getElementById("sampleeditor").innerHTML;
-    const title = document.getElementById("title").textContent;
+    const content = document.getElementById('sampleeditor').innerHTML;
+    const title = document.getElementById('title').textContent;
 
     const post = {
       title,
@@ -137,22 +137,22 @@ export default class Editor extends React.Component {
 
     !this.props.match.params.id //checking if post is a draft or a new post
       ? PostsApiService.postPost(post)
-        //if new post, POST to DATABASE
+          //if new post, POST to DATABASE
           .then((res) =>
             !res.ok
               ? res.json().then((e) => Promise.reject(e))
               : res.json().then((res) => {
                   this.props.history.push(`/editor/${res.id}`);
-                  this.setState({ autosave: "Saved" });
+                  this.setState({ autosave: 'Saved' });
                 })
           )
           .catch((err) => this.context.setError(err.error))
       : PostsApiService.patchPost(post, this.props.match.params.id)
-        // if Draft, PATCH existing post
+          // if Draft, PATCH existing post
           .then((res) =>
             !res.ok
               ? res.json().then((e) => Promise.reject(e))
-              : this.setState({ autosave: "Saved" })
+              : this.setState({ autosave: 'Saved' })
           )
           .catch((err) => this.context.setError(err.error));
   }
@@ -167,7 +167,7 @@ export default class Editor extends React.Component {
 
   maxLength(e) {
     const max = 100;
-    const chars = document.getElementById("title").textContent.length;
+    const chars = document.getElementById('title').textContent.length;
 
     if (chars >= max && e.keyCode !== 8) {
       e.preventDefault();
@@ -179,28 +179,28 @@ export default class Editor extends React.Component {
       <React.Fragment>
         <EditorToolbar />
         {this.context.error !== null ? (
-          <div className="error-container">
-            <p className="error">{this.context.error}</p>
+          <div className='error-container'>
+            <p className='error'>{this.context.error}</p>
           </div>
         ) : null}
         <div
-          id="title"
-          contentEditable="true"
-          spellCheck="true"
-          placeholder="Title..."
-          data-placeholder="Title..."
-          className="title"
+          id='title'
+          contentEditable='true'
+          spellCheck='true'
+          placeholder='Title...'
+          data-placeholder='Title...'
+          className='title'
           onKeyDown={(e) => this.maxLength(e)}
         >
           {this.state.post ? this.state.post.title : null}
         </div>
         <div
-          className="editor"
-          id="sampleeditor"
-          contentEditable="true"
-          placeholder="Body..."
-          spellCheck="true"
-          data-placeholder="Body..."
+          className='editor'
+          id='sampleeditor'
+          contentEditable='true'
+          placeholder='Body...'
+          spellCheck='true'
+          data-placeholder='Body...'
           onKeyUp={(e) => this.setAutoSaveTimeout(e)}
           onTar
         >
@@ -208,7 +208,7 @@ export default class Editor extends React.Component {
         </div>
 
         {this.state.autosave ? (
-          <div className="autosave">
+          <div className='autosave'>
             <p>{this.state.autosave}</p>
           </div>
         ) : null}

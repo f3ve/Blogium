@@ -18,11 +18,11 @@ main {
 }
 
 #title {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 #content,
 #sampleeditor {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   line-height: 26px;
 }

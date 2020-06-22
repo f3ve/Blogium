@@ -1,13 +1,13 @@
-import config from "../config";
-import TokenService from "./token-service";
-import IdleService from "./idle-services";
+import config from '../config';
+import TokenService from './token-service';
+import IdleService from './idle-services';
 
 const AuthApiService = {
   postLogin(credentials) {
     return fetch(`${config.API_BASE_URL}/auth/login`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(credentials),
     })
@@ -26,9 +26,9 @@ const AuthApiService = {
 
   postUser(user) {
     return fetch(`${config.API_BASE_URL}/users`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(user),
     }).then((res) =>
@@ -38,7 +38,7 @@ const AuthApiService = {
 
   postRefreshToken() {
     return fetch(`${config.API_BASE_URL}/auth/refresh`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         authorization: `Bearer ${TokenService.getAuthToken()}`,
       },
@@ -54,7 +54,7 @@ const AuthApiService = {
         return res;
       })
       .catch((err) => {
-        console.log("refresh token request error");
+        console.log('refresh token request error');
         console.error(err);
       });
   },

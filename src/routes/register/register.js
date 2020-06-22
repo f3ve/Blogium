@@ -1,34 +1,34 @@
-import React from "react";
-import AuthApiService from "../../services/auth-api-service";
-import TokenService from "../../services/token-service";
-import PostsApiService from "../../services/posts-api-services";
-import Context from "../../context";
-import { withRouter } from "react-router-dom";
-import ValidationError from "../../ValidationError";
-import "./register.css";
+import React from 'react';
+import AuthApiService from '../../services/auth-api-service';
+import TokenService from '../../services/token-service';
+import PostsApiService from '../../services/posts-api-services';
+import Context from '../../context';
+import { withRouter } from 'react-router-dom';
+import ValidationError from '../../ValidationError';
+import './register.css';
 
 class Register extends React.Component {
   static contextType = Context;
 
   state = {
     full_name: {
-      value: "",
+      value: '',
       changed: false,
     },
     username: {
-      value: "",
+      value: '',
       changed: false,
     },
     email: {
-      value: "",
+      value: '',
       changed: false,
     },
     password: {
-      value: "",
+      value: '',
       changed: false,
     },
     matchPassword: {
-      value: "",
+      value: '',
       changed: false,
     },
   };
@@ -102,23 +102,23 @@ class Register extends React.Component {
   validateName() {
     const name = this.state.full_name.value;
     if (name.length < 3) {
-      return "Your name must be longer than 3 characters";
+      return 'Your name must be longer than 3 characters';
     }
   }
 
   validateEmail() {
     const email = this.state.email.value;
     if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      return "You must enter a valid email";
+      return 'You must enter a valid email';
     }
   }
 
   validateUsername() {
     const username = this.state.username.value;
     if (username.length < 4) {
-      return "Username must be at least 4 characters";
+      return 'Username must be at least 4 characters';
     }
-    if (username.startsWith(" ") || username.endsWith(" ")) {
+    if (username.startsWith(' ') || username.endsWith(' ')) {
       return `Username cannot start or end with empty space`;
     }
   }
@@ -128,16 +128,16 @@ class Register extends React.Component {
     const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[\S]+/;
 
     if (password.length < 8) {
-      return "Password must be at least 8 characters";
+      return 'Password must be at least 8 characters';
     }
     if (password.length > 72) {
-      return "Password must be less than 72 characters";
+      return 'Password must be less than 72 characters';
     }
-    if (password.startsWith(" ") || password.endsWith(" ")) {
-      return "Password must not start or end with empty spaces";
+    if (password.startsWith(' ') || password.endsWith(' ')) {
+      return 'Password must not start or end with empty spaces';
     }
     if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
-      return "Password must contain 1 upper case, lower case, number, and special character";
+      return 'Password must contain 1 upper case, lower case, number, and special character';
     }
   }
 
@@ -146,7 +146,7 @@ class Register extends React.Component {
     const matchPassword = this.state.matchPassword.value;
 
     if (password !== matchPassword) {
-      return "Passwords do not match";
+      return 'Passwords do not match';
     }
   }
 
@@ -169,20 +169,20 @@ class Register extends React.Component {
 
   clickCancel(e) {
     e.preventDefault();
-    this.props.history.push("/main");
+    this.props.history.push('/main');
   }
 
   render() {
     return (
-      <section id="registration-container">
+      <section id='registration-container'>
         <h2>Create Account</h2>
-        <form id="registration-form" onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor="full_name">Full Name:</label>
+        <form id='registration-form' onSubmit={(e) => this.handleSubmit(e)}>
+          <label htmlFor='full_name'>Full Name:</label>
           <input
-            type="text"
-            id="full_name"
-            placeholder="Full Name"
-            name="full_name"
+            type='text'
+            id='full_name'
+            placeholder='Full Name'
+            name='full_name'
             onChange={(e) => this.updateName(e)}
             required
           />
@@ -191,12 +191,12 @@ class Register extends React.Component {
             <ValidationError message={this.validateName()} />
           )}
 
-          <label htmlFor="username">Username:</label>
+          <label htmlFor='username'>Username:</label>
           <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="username"
+            type='text'
+            id='username'
+            name='username'
+            placeholder='username'
             onChange={(e) => this.updateUsername(e)}
             required
           />
@@ -205,12 +205,12 @@ class Register extends React.Component {
             <ValidationError message={this.validateUsername()} />
           )}
 
-          <label htmlFor="email">email:</label>
+          <label htmlFor='email'>email:</label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="youremail@email.com"
+            type='email'
+            id='email'
+            name='email'
+            placeholder='youremail@email.com'
             onChange={(e) => this.updateEmail(e)}
             required
           />
@@ -219,12 +219,12 @@ class Register extends React.Component {
             <ValidationError message={this.validateEmail()} />
           )}
 
-          <label htmlFor="password">Password:</label>
+          <label htmlFor='password'>Password:</label>
           <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
+            type='password'
+            id='password'
+            name='password'
+            placeholder='Password'
             onChange={(e) => this.updatePassword(e)}
             required
           />
@@ -233,12 +233,12 @@ class Register extends React.Component {
             <ValidationError message={this.validatePassword()} />
           )}
 
-          <label htmlFor="matchPassword">Re-enter Password:</label>
+          <label htmlFor='matchPassword'>Re-enter Password:</label>
           <input
-            type="password"
-            id="matchPassword"
-            name="matchPassword"
-            placeholder="Password"
+            type='password'
+            id='matchPassword'
+            name='matchPassword'
+            placeholder='Password'
             onChange={(e) => this.updateMatchPassword(e)}
             required
           />
@@ -247,10 +247,10 @@ class Register extends React.Component {
             <ValidationError message={this.validateMatchPassword()} />
           )}
 
-          <div className="button-container">
+          <div className='button-container'>
             <button
-              className="clickMe"
-              type="submit"
+              className='clickMe'
+              type='submit'
               disabled={
                 this.validateName() ||
                 this.validateUsername() ||
@@ -261,11 +261,11 @@ class Register extends React.Component {
             >
               Create Account
             </button>
-            <button className="clickMe" onClick={(e) => this.clickCancel(e)}>
+            <button className='clickMe' onClick={(e) => this.clickCancel(e)}>
               Cancel
             </button>
             {this.context.error !== null ? (
-              <p className="error">{this.context.error}</p>
+              <p className='error'>{this.context.error}</p>
             ) : null}
           </div>
         </form>

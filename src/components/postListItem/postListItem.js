@@ -1,9 +1,9 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import Context from "../../context";
-import { translateDate } from "../utils/utils";
-import "./postListItem.css";
-import PostsApiService from "../../services/posts-api-services";
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import Context from '../../context';
+import { translateDate } from '../utils/utils';
+import './postListItem.css';
+import PostsApiService from '../../services/posts-api-services';
 
 class PostListItem extends React.Component {
   static contextType = Context;
@@ -27,11 +27,11 @@ class PostListItem extends React.Component {
 
   RenderButtons() {
     return (
-      <div className="clickMe-container">
-        <button className="clickMe" onClick={(e) => this.handleEdit(e)}>
+      <div className='clickMe-container'>
+        <button className='clickMe' onClick={(e) => this.handleEdit(e)}>
           Edit
         </button>
-        <button className="clickMe" onClick={(e) => this.handleDelete(e)}>
+        <button className='clickMe' onClick={(e) => this.handleDelete(e)}>
           Delete
         </button>
       </div>
@@ -44,7 +44,7 @@ class PostListItem extends React.Component {
     return (
       <li key={post.id}>
         <Link
-          className="post-container"
+          className='post-container'
           to={
             post.published === false ? `/editor/${post.id}` : `/post/${post.id}`
           }
@@ -52,17 +52,17 @@ class PostListItem extends React.Component {
           <img
             src={post.user.img}
             alt={`${post.user.username}'s profile icon`}
-            className="postImg"
+            className='postImg'
           ></img>
-          <section className="content-container">
-            <h2 className="postTitle">
-              {post.title === ""
-                ? "Untitled"
+          <section className='content-container'>
+            <h2 className='postTitle'>
+              {post.title === ''
+                ? 'Untitled'
                 : post.title.length >= 60
-                ? post.title.slice(0, 60) + "..."
+                ? post.title.slice(0, 60) + '...'
                 : post.title}
             </h2>
-            <p className="date-p">{date}</p>
+            <p className='date-p'>{date}</p>
           </section>
           {buttons ? this.RenderButtons() : null}
         </Link>
@@ -75,10 +75,10 @@ PostListItem.defaultProps = {
   post: {
     id: 1,
     date_created: new Date(),
-    title: "",
-    img: "",
+    title: '',
+    img: '',
     user: {
-      username: "",
+      username: '',
     },
   },
 };

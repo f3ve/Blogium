@@ -1,10 +1,10 @@
-import React from "react";
-import Context from "../../context";
-import PostsApiService from "../../services/posts-api-services";
-import { Link } from "react-router-dom";
-import Comments from "../../components/comments/comments";
-import CommentForm from "../../components/commentForm/commentForm";
-import "./postPage.css";
+import React from 'react';
+import Context from '../../context';
+import PostsApiService from '../../services/posts-api-services';
+import { Link } from 'react-router-dom';
+import Comments from '../../components/comments/comments';
+import CommentForm from '../../components/commentForm/commentForm';
+import './postPage.css';
 
 class PostPage extends React.Component {
   static defaultProps = {
@@ -29,7 +29,7 @@ class PostPage extends React.Component {
           post: res,
         })
       )
-      .catch((err) => this.props.history.push("/notfound"));
+      .catch((err) => this.props.history.push('/notfound'));
 
     PostsApiService.getComments(id)
       .then((res) =>
@@ -68,7 +68,7 @@ class PostPage extends React.Component {
   renderPost() {
     const { post, comments } = this.state;
 
-    const content = document.getElementById("content");
+    const content = document.getElementById('content');
     if (content !== null) {
       content.innerHTML = post.content;
     }
@@ -80,27 +80,27 @@ class PostPage extends React.Component {
     return (
       <React.Fragment>
         <section>
-          <h2 id="title">{post.title}</h2>
-          <div id="content"></div>
-          <section className="author-container">
+          <h2 id='title'>{post.title}</h2>
+          <div id='content'></div>
+          <section className='author-container'>
             <h3>Written by</h3>
-            <div className="author-info">
+            <div className='author-info'>
               <Link to={`/user/${post.user.id}`}>
                 <img
                   src={post.user.img}
                   alt={`${post.user.username}'s profile icon`}
-                  className="author-img"
+                  className='author-img'
                 ></img>
               </Link>
-              <p className="author-username">{post.user.username}</p>
+              <p className='author-username'>{post.user.username}</p>
             </div>
             <p>{post.user.bio}</p>
           </section>
         </section>
-        <section className="comment-section">
+        <section className='comment-section'>
           <CommentForm postId={post.id} handleComment={this.handleComment} />
           {this.context.error !== null ? (
-            <p className="error">{this.context.error}</p>
+            <p className='error'>{this.context.error}</p>
           ) : null}
           {comments.length === 0 ? (
             <p>No one has commented yet. Be the first!</p>

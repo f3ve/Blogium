@@ -1,9 +1,9 @@
-import React from "react";
-import PostsApiService from "../../services/posts-api-services";
-import { Link } from "react-router-dom";
-import PostListItem from "../../components/postListItem/postListItem";
-import Context from "../../context";
-import "./drafts.css";
+import React from 'react';
+import PostsApiService from '../../services/posts-api-services';
+import { Link } from 'react-router-dom';
+import PostListItem from '../../components/postListItem/postListItem';
+import Context from '../../context';
+import './drafts.css';
 
 class Drafts extends React.Component {
   static contextType = Context;
@@ -29,9 +29,9 @@ class Drafts extends React.Component {
   renderDrafts() {
     return (
       <React.Fragment>
-        <ul className="post-list">
+        <ul className='post-list'>
           {this.context.error !== null ? (
-            <p className="error">{this.context.error}</p>
+            <p className='error'>{this.context.error}</p>
           ) : null}
           {this.state.drafts.map((p) => {
             return (
@@ -51,11 +51,11 @@ class Drafts extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h2 className="yourDrafts">Your Drafts</h2>
+        <h2 className='yourDrafts'>Your Drafts</h2>
         {this.state.drafts.length === 0 ? (
-          <p className="noDrafts">
-            No drafts.{" "}
-            <Link className="clickMe" to="/editor">
+          <p className='noDrafts'>
+            No drafts.{' '}
+            <Link className='clickMe' to='/editor'>
               Create a new post.
             </Link>
           </p>

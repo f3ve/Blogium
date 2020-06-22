@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import Main from "./main";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import Main from './main';
 
-describe("Main route", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+describe('Main route', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
     ReactDOM.render(
       <BrowserRouter>
         <Main />
