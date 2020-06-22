@@ -54,8 +54,6 @@ class CommentForm extends React.Component {
           placeholder='Leave a comment...'
           id='comment-input'
           aria-label='Type a comment...'
-          rows='4'
-          cols='29'
         />
         <button className='clickMe' type='submit'>
           Comment
